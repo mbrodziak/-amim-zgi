@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Lamimozgi</string>
+    <string name="sudoku">Sudoku</string>
+    <string name="wykreslanka">Wykreślanka</string>
+    <string name="krzyzowka">Krzyżówka</string>
+    <string name="zgadywanki">Zgadywanki</string>
+    <string name="wisielec">Wisielec</string>
+    <string name="wybierz_lamimozg">Którego Łamimózga się podejmiesz?</string>
 </resources>
