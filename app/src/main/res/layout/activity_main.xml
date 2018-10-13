@@ -1,67 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/color_green"
     tools:context=".MainActivity">
 
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="127dp"
-        android:text="@string/sudoku" />
+        android:layout_marginTop="170dp"
+        android:text="@string/sudoku"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="195dp"
-        android:text="@string/wykreslanka" />
+        android:layout_marginTop="220dp"
+        android:text="@string/wykreslanka"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/button4"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="197dp"
-        android:text="@string/krzyzowka" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="270dp"
+        android:text="@string/krzyzowka"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="-13dp"
-        android:layout_marginBottom="121dp"
-        android:text="@string/zgadywanki" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="320dp"
+        android:text="@string/zgadywanki"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="55dp"
-        android:text="@string/wisielec" />
+        android:layout_alignStart="@+id/button3"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="370dp"
+        android:text="@string/wisielec"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="296dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="false"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="43dp"
-        android:text="@string/wybierz_lamimozg"
-        android:textSize="24sp" />
+        android:layout_marginTop="100dp"
+        android:text="@string/wybierz_lamimozga"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+
 </RelativeLayout>
