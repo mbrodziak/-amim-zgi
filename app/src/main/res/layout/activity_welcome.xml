@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/color_green">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/color_green"
+    tools:context=".WelcomeActivity">
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -12,8 +15,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="65dp"
-        app:srcCompat="@drawable/logo_lamimozgi"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/logo_lamimozgi" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -23,6 +26,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="33dp"
         android:layout_marginTop="18dp"
-        app:srcCompat="@drawable/welcomelamimozgi"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/welcome"
+        app:srcCompat="@drawable/welcomelamimozgi" />
 </RelativeLayout>

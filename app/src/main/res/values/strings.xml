@@ -6,4 +6,10 @@
     <string name="zgadywanki">Zgadywanki</string>
     <string name="wisielec">Wisielec</string>
     <string name="wybierz_lamimozg">Którego Łamimózga się podejmiesz?</string>
+    <string name="wybierz_lamimozga">Wybierz Łamimózga</string>
+    <string name="graj">GRAJ</string>
+    <string name="opcje">OPCJE</string>
+    <string name="statystyki">STATYSTYKI</string>
+    <string name="o_aplikacji">O APLIKACJI</string>
+    <string name="welcome">Welcome</string>
 </resources>

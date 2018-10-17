@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/color_green"
-    tools:context=".MainActivity">
+    tools:context=".GameChoiceActivity">
 
 
     <Button
@@ -14,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="270dp"
-        android:text="@string/graj"
+        android:layout_marginTop="170dp"
+        android:text="@string/sudoku"
         android:textColor="@android:color/black"
         android:textSize="24sp" />
 
@@ -25,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="320dp"
-        android:text="@string/opcje"
+        android:layout_marginTop="220dp"
+        android:text="@string/wykreslanka"
         android:textColor="@android:color/black"
         android:textSize="24sp" />
 
@@ -37,8 +36,8 @@
         android:layout_alignStart="@+id/button4"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="370dp"
-        android:text="@string/statystyki"
+        android:layout_marginTop="270dp"
+        android:text="@string/krzyzowka"
         android:textColor="@android:color/black"
         android:textSize="24sp" />
 
@@ -48,19 +47,32 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/button"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="420dp"
-        android:text="@string/o_aplikacji"
+        android:layout_marginTop="320dp"
+        android:text="@string/zgadywanki"
         android:textColor="@android:color/black"
         android:textSize="24sp" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="296dp"
-        android:layout_height="220dp"
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button3"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="370dp"
+        android:text="@string/wisielec"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="9dp"
-        android:contentDescription="@string/app_name"
-        app:srcCompat="@drawable/logo_lamimozgi" />
+        android:layout_centerVertical="false"
+        android:layout_marginTop="100dp"
+        android:text="@string/wybierz_lamimozga"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
 
 </RelativeLayout>
