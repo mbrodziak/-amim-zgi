@@ -1,6 +1,5 @@
 package com.example.mateusz.lamimozgi;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,7 +13,6 @@ public class WelcomeActivity extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(3500);
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 } catch (InterruptedException e) {
                     e.printStackTrace();

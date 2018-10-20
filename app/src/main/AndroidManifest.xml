@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mateusz.lamimozgi">
 
-    <application
-        android:allowBackup="true"
+    <application android:name=".GameApplication"
+        android:allowBackup="false"
         android:icon="@drawable/logo_lamimozgi2"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_lamimozgi2"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".WelcomeActivity">
+        </activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <category android:name="android.Intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".GameChoiceActivity" />
         <activity android:name=".LevelActivity" />
     </application>
