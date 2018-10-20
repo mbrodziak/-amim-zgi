@@ -12,4 +12,13 @@
     <string name="statystyki">STATYSTYKI</string>
     <string name="o_aplikacji">O APLIKACJI</string>
     <string name="welcome">Welcome</string>
+    <string name="swiat_lamimozgow">ŚWIAT ŁAMIMÓZGÓW CZEKA NA CIEBIE. CO CHCESZ ZROBIĆ?</string>
+    <string name="wybor_lamimozga">KTÓREGO ŁAMIMÓZGA WYBIERZESZ?</string>
+    <string name="rodzaj_sudoku">WYBIERZ RODZIAJ SUDOKU</string>
+    <string name="nieregularne">Nieregularne</string>
+    <string name="zwykle">Zwykłe</string>
+    <string name="wybor_poziomu">WYBIERZ POZIOM ŁAMIMÓZGA</string>
+    <string name="trudny">trudny</string>
+    <string name="sredni">sredni</string>
+    <string name="latwy">latwy</string>
 </resources>

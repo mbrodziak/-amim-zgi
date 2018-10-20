@@ -66,9 +66,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="46dp"
-        android:text="ŚWIAT ŁAMIMÓZGÓW CZEKA NA CIEBIE. CO CHCESZ ZROBIĆ?"
+        android:text="@string/swiat_lamimozgow"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/darker_gray"
         android:textSize="42sp"
         android:textStyle="bold" />
 
