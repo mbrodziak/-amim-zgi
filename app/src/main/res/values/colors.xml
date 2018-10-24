@@ -3,4 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574b</color>
     <color name="colorAccent">#d81b60</color>
+    <color name="upsdellRed">#D64881</color>
+    <color name="cosmicCobalt">#2A52BE</color>
+    <color name="darkBlack">#000000</color>
+    <color name="proba2">#808080 </color>
+    <color name="proba1">#808080</color>
+
 </resources>

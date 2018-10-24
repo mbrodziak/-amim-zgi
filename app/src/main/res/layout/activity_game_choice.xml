@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <TextView
+    <com.example.mateusz.lamimozgi.GradientTextView
+        android:id="@+id/MainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="63dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/round_textview"
         android:text="@string/wybor_lamimozga"
-        android:textColor="@android:color/darker_gray"
         android:textAlignment="center"
-        android:textSize="39sp"
-        android:textStyle="bold" />
+        android:textAllCaps="true"
+        android:textColor="@color/darkBlack"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/rubik_mono_one" />
 
     <Button
         android:id="@+id/sudoku"
@@ -25,11 +32,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="230dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/round_button"
         android:text="@string/sudoku"
         android:textColor="@android:color/black"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/wordSearch"
@@ -39,11 +47,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="290dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="310dp"
+        android:background="@drawable/round_button"
         android:text="@string/wykreslanka"
         android:textColor="@android:color/black"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/crossword"
@@ -53,11 +62,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="350dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="370dp"
+        android:background="@drawable/round_button"
         android:text="@string/krzyzowka"
         android:textColor="@android:color/black"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/guesswork"
@@ -67,11 +77,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="410dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="430dp"
+        android:background="@drawable/round_button"
         android:text="@string/zgadywanki"
         android:textColor="@android:color/black"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/hangman"
@@ -81,10 +92,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="470dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="490dp"
+        android:background="@drawable/round_button"
         android:text="@string/wisielec"
         android:textColor="@android:color/black"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+
 
 </RelativeLayout>

@@ -18,4 +18,8 @@
     <string name="trudny">trudny</string>
     <string name="sredni">sredni</string>
     <string name="latwy">latwy</string>
+    <string name="option_text">O to opcje, które czekają na ustawienie. Co zrobisz?</string>
+    <string name="muzyka">Muzyka</string>
+    <string name="dzwiek">Dźwięk</string>
+    <string name="resetuj">Resetuj</string>
 </resources>

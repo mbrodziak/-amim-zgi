@@ -5,19 +5,24 @@
     android:background="@drawable/background"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
+    <com.example.mateusz.lamimozgi.GradientTextView
+        android:id="@+id/MainText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="78dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/round_textview"
         android:text="@string/rodzaj_sudoku"
         android:textAlignment="center"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textAllCaps="true"
+        android:textColor="@color/darkBlack"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/rubik_mono_one" />
 
     <Button
         android:id="@+id/normalButton"
@@ -28,10 +33,11 @@
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="200dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/round_button"
         android:text="@string/zwykle"
         android:textColor="@android:color/black"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/unNormal"
@@ -42,9 +48,10 @@
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="300dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/round_button"
         android:text="@string/nieregularne"
         android:textColor="@android:color/black"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textStyle="bold"/>
 
 </RelativeLayout>
