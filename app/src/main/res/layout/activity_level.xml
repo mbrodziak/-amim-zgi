@@ -17,12 +17,12 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_textview"
-        android:text="@string/wybor_poziomu"
+        android:text="@string/choice_level"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/darkBlack"
         android:textSize="30sp"
-        android:textStyle="bold"
+        android:textStyle="normal"
         app:fontFamily="@font/rubik_mono_one" />
 
     <ImageView
@@ -33,7 +33,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="100dp"
         android:layout_marginTop="500dp"
-        android:contentDescription="@string/trudny"
+        android:contentDescription="@string/hard"
         app:srcCompat="@drawable/trudny" />
 
     <ImageView
@@ -44,7 +44,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="100dp"
         android:layout_marginTop="320dp"
-        android:contentDescription="@string/sredni"
+        android:contentDescription="@string/medium"
         app:srcCompat="@drawable/sredni" />
 
     <ImageView
@@ -55,7 +55,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="100dp"
         android:layout_marginTop="140dp"
-        android:contentDescription="@string/latwy"
+        android:contentDescription="@string/easy"
         app:srcCompat="@drawable/latwy" />
 
 </RelativeLayout>

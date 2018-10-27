@@ -4,31 +4,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <TextView
-        android:id="@+id/sound2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/MainText"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="352dp"
-        android:layout_marginEnd="58dp"
-        android:background="@drawable/round_button"
-        android:text="@string/muzyka"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
 
     <com.example.mateusz.lamimozgi.GradientTextView
         android:id="@+id/MainText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="63dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/round_textview"
         android:fontFamily="@font/rubik_mono_one"
@@ -36,82 +21,50 @@
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/darkBlack"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/sound"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/round_button"
+        android:text="@string/volume_loud"
+        android:textColor="@android:color/black"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/music"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/round_button"
+        android:text="@string/volume_music"
+        android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <SeekBar
-        android:id="@+id/soundBar"
-        android:layout_width="166dp"
-        android:layout_height="47dp"
-        android:layout_below="@id/MainText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="290dp"
-        android:layout_marginEnd="180dp"
-        android:background="@drawable/round_button"
-        android:text="@string/graj"
-        android:textColor="@android:color/black"
-        android:textSize="30sp" />
-
-    <SeekBar
-        android:id="@+id/soundBar2"
-        android:layout_width="166dp"
-        android:layout_height="47dp"
-        android:layout_below="@id/MainText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="58dp"
-        android:layout_marginTop="349dp"
-        android:layout_marginEnd="180dp"
-        android:background="@drawable/round_button"
-        android:text="@string/graj"
-        android:textColor="@android:color/black"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/sound"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/MainText"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="290dp"
-        android:layout_marginEnd="60dp"
-        android:background="@drawable/round_button"
-        android:text="@string/dzwiek"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
-
     <Button
-        android:id="@+id/statistics"
+        android:id="@+id/reset"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="540dp"
         android:layout_marginEnd="60dp"
         android:background="@drawable/round_button"
-        android:text="@string/resetuj"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
-
-    <Button
-        android:id="@+id/about"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_below="@+id/statistics"
-        android:layout_marginTop="500dp"
-        android:background="@drawable/round_button"
-        android:text="@string/o_aplikacji"
+        android:text="@string/reset"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"/>

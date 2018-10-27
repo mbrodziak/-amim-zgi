@@ -7,7 +7,7 @@
 
     <com.example.mateusz.lamimozgi.GradientTextView
         android:id="@+id/MainText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -16,11 +16,11 @@
         android:layout_marginTop="63dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/round_textview"
-        android:text="@string/choice_lamimozg"
+        android:text="@string/want_reset"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/darkBlack"
-        android:textSize="36sp"
+        android:textSize="40sp"
         android:textStyle="normal"
         app:fontFamily="@font/rubik_mono_one" />
 

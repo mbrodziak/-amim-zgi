@@ -16,13 +16,12 @@
         android:layout_marginTop="19dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/round_textview"
-        android:text="@string/rodzaj_sudoku"
+        android:fontFamily="@font/rubik_mono_one"
+        android:text="@string/type_sudoku"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/darkBlack"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/rubik_mono_one" />
+        android:textSize="36sp" />
 
     <Button
         android:id="@+id/normalButton"
@@ -34,7 +33,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="200dp"
         android:background="@drawable/round_button"
-        android:text="@string/zwykle"
+        android:text="@string/normal"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"/>
@@ -49,7 +48,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="300dp"
         android:background="@drawable/round_button"
-        android:text="@string/nieregularne"
+        android:text="@string/irregular"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"/>

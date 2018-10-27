@@ -1,13 +1,10 @@
 package com.example.mateusz.lamimozgi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,13 +19,20 @@ public class MainActivity extends AppCompatActivity {
     private void setUpViews() {
         Button playButton = findViewById(R.id.play);
         Button optionsButton = findViewById(R.id.options);
-        Button statisticsButton = findViewById(R.id.statistics);
+        Button statisticsButton = findViewById(R.id.reset);
         Button aboutButton = findViewById(R.id.about);
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), GameChoiceActivity.class));
+            }
+        });
+
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), OptionsActivity.class));
             }
         });
     }
