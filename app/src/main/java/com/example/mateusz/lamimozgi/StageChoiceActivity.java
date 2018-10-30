@@ -6,12 +6,9 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.example.mateusz.lamimozgi.adapters.StageListAdapter;
-import com.example.mateusz.lamimozgi.items.Stage;
 
 public class StageChoiceActivity extends ListActivity{
-    private int selectedPosition;
     private GameApplication app;
-    private Stage selectedStage;
     private StageListAdapter adapter;
 
     @Override
@@ -31,9 +28,7 @@ public class StageChoiceActivity extends ListActivity{
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        selectedPosition = position;
-        selectedStage = adapter.getItem(position);
-        app.selectedStage = selectedStage;
+        app.selectedStage = adapter.getItem(position);
         app.gameStart();
     }
 }

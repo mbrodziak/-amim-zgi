@@ -1,6 +1,7 @@
 package com.example.mateusz.lamimozgi;
 
 import android.app.Application;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +10,13 @@ import com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper;
 import com.example.mateusz.lamimozgi.items.Stage;
 
 import java.util.ArrayList;
+
+import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.COMPLETE;
+import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE;
+import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_EXTRA;
+import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_ID;
+import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_NAME;
+import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_SAVE;
 
 public class GameApplication extends Application {
     public String gameType;
@@ -59,10 +67,14 @@ public class GameApplication extends Application {
                 String stage_id = tasksCursor.getString(0);
                 String name = tasksCursor.getString(1);
                 String stage = tasksCursor.getString(2);
-                String boolValue = tasksCursor.getString(3);
+                String save = tasksCursor.getString(3);
+                String extra = tasksCursor.getString(4);
+                String boolValue = tasksCursor.getString(5);
                 boolean complete = Boolean.parseBoolean(boolValue);
                 s = new Stage(name, stage, complete);
                 s.setID(stage_id);
+                s.setSave(save);
+                s.setExtra(extra);
                 currentStages.add(s);
                 currentStagesId.add(stage_id);
             } while(tasksCursor.moveToNext());
@@ -75,6 +87,18 @@ public class GameApplication extends Application {
     }
 
     public void saveStage() {
+        assert (null != selectedStage);
 
+        ContentValues values = new ContentValues();
+        values.put(STAGE_NAME, selectedStage.getName());
+        values.put(STAGE, selectedStage.getStage());
+        values.put(STAGE_SAVE, selectedStage.getSave());
+        values.put(STAGE_EXTRA, selectedStage.getExtra());
+        values.put(COMPLETE, Boolean.toString(selectedStage.isComplete()));
+
+        String id = selectedStage.getID();
+        String where = String.format("%s = '%s'", STAGE_ID, id);
+        String STAGE_TABLE = gameType + gameLevel;
+        database.update(STAGE_TABLE, values, where, null);
     }
 }

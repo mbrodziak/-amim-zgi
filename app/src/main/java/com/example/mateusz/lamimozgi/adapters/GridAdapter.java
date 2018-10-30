@@ -36,13 +36,18 @@ public class GridAdapter extends ArrayAdapter<SudokuCell> {
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
 
-        if (Objects.requireNonNull(this.getItem(position)).isInitialValue()) {
-            view.setBackgroundResource(R.drawable.initial_cell_background);
+        if (Objects.requireNonNull(this.getItem(position)).isEven()){
+            view.setBackgroundResource(R.drawable.even_cell_background);
+        }
+        if (!Objects.requireNonNull(this.getItem(position)).isEven()){
+            view.setBackgroundResource(R.drawable.odd_cell_background);
         }
         if (Objects.requireNonNull(this.getItem(position)).isHighlighted()) {
-            ((TextView) view).setTextColor(Color.RED);
+            ((TextView) view).setTextColor(Color.parseColor("#ff0000"));
         } else {
-            ((TextView) view).setTextColor(Color.BLACK);
+            ((TextView) view).setTextColor(Color.parseColor("#ffffff"));
+        }if (Objects.requireNonNull(this.getItem(position)).isInitialValue()){
+            ((TextView) view).setTextColor(Color.parseColor("#00DA00"));
         }
 
         return view;

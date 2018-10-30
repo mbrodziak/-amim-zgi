@@ -5,12 +5,14 @@ import android.support.annotation.NonNull;
 public class SudokuCell {
     private int value;
     private final boolean isInitialValue;
+    private final boolean isEven;
     private boolean isHighlighted;
 
-    public SudokuCell(int val, boolean isInitial) {
+    public SudokuCell(int val, boolean isInitial, boolean isEven) {
         this.value = val;
         this.isInitialValue = isInitial;
         this.isHighlighted = false;
+        this.isEven = isEven;
     }
 
     public int getValue() {
@@ -23,6 +25,10 @@ public class SudokuCell {
 
     public boolean isInitialValue() {
         return isInitialValue;
+    }
+
+    public boolean isEven(){
+        return isEven;
     }
 
     public boolean isHighlighted() {

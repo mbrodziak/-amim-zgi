@@ -4,7 +4,7 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/cell_background"
+    android:background="@drawable/even_cell_background"
     android:drawablePadding="@dimen/activity_horizontal_margin"
     android:gravity="center_vertical|center_horizontal"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
