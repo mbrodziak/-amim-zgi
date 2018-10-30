@@ -6,7 +6,7 @@
     android:background="@drawable/background">
 
 
-    <com.example.mateusz.lamimozgi.GradientTextView
+    <TextView
         android:id="@+id/MainText"
         android:layout_width="395dp"
         android:layout_height="wrap_content"

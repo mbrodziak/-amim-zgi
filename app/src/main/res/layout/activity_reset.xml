@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <com.example.mateusz.lamimozgi.GradientTextView
+    <TextView
         android:id="@+id/MainText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         app:fontFamily="@font/rubik_mono_one" />
 
     <Button
-        android:id="@+id/sudoku"
+        android:id="@+id/sudokuReset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -40,7 +40,7 @@
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/wordSearch"
+        android:id="@+id/wordSearchReset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -55,7 +55,7 @@
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/crossword"
+        android:id="@+id/crosswordReset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -70,7 +70,7 @@
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/guesswork"
+        android:id="@+id/guessworkReset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -85,7 +85,7 @@
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/hangman"
+        android:id="@+id/hangmanReset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

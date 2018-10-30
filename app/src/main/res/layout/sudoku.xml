@@ -1,10 +1,121 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
 
+    <GridView
+        android:id="@+id/sudokuGrid"
+        android:layout_width="fill_parent"
+        android:layout_height="357dp"
+        android:numColumns="9"
+        android:stretchMode="columnWidth"
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_alignParentTop="true" />
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="141dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/relativeLayout">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/one"
+            android:id="@+id/button1Value"
+            android:layout_above="@+id/button4Value"
+            android:layout_alignParentStart="true" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/two"
+            android:id="@+id/button2Value"
+            android:layout_above="@+id/button5Value"
+            android:layout_toEndOf="@+id/button1Value" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button3Value"
+            android:text="@string/three"
+            android:layout_above="@+id/button6Value"
+            android:layout_toEndOf="@+id/button2Value" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/four"
+            android:id="@+id/button4Value"
+            android:layout_above="@+id/button7Value"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/five"
+            android:id="@+id/button5Value"
+            android:layout_above="@+id/button8Value"
+            android:layout_toEndOf="@+id/button4Value" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/six"
+            android:id="@+id/button6Value"
+            android:layout_alignBottom="@+id/button5Value"
+            android:layout_toEndOf="@+id/button2Value" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seven"
+            android:id="@+id/button7Value"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eight"
+            android:id="@+id/button8Value"
+            android:layout_alignBottom="@+id/button7Value"
+            android:layout_toEndOf="@+id/button4Value" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nine"
+            android:id="@+id/button9Value"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/button8Value" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clearField"
+        android:id="@+id/buttonNullValue"
+        android:layout_alignBottom="@+id/relativeLayout"
+        android:layout_toEndOf="@+id/relativeLayout" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/solveBoard"
+        android:id="@+id/buttonCheckBoard"
+        android:layout_above="@+id/buttonNullValue"
+        android:layout_toEndOf="@+id/relativeLayout" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/markValue"
+        android:id="@+id/buttonMarkValue"
+        android:layout_above="@+id/buttonCheckBoard"
+        android:layout_toEndOf="@+id/relativeLayout" />
+
+</RelativeLayout>

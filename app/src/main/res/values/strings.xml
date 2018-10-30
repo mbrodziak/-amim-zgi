@@ -27,4 +27,19 @@
     <string name="volume_loud">Głośność dźwięku</string>
     <string name="volume_music">Głośność muzyki</string>
     <string name="want_reset">Co chcesz zresetować?</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="clearField">Wyczyść</string>
+    <string name="solveBoard">Sprawdź</string>
+    <string name="markValue">Oznacz</string>
+    <string name="finished">Wykonano</string>
+    <string name="not_finished">Nie zrobione</string>
+    <string name="choice_stage">CO WYBIERASZ?</string>
 </resources>
