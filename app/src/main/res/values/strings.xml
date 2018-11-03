@@ -41,5 +41,7 @@
     <string name="markValue">Oznacz</string>
     <string name="finished">Wykonano</string>
     <string name="not_finished">Nie zrobione</string>
-    <string name="choice_stage">CO WYBIERASZ?</string>
+    <string name="choice_stage">Co wybierasz?</string>
+    <string name="menu">Menu główne Łamimózgów</string>
+    <string name="logo">logo</string>
 </resources>

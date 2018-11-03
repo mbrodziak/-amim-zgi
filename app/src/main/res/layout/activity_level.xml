@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/background6">
 
 
     <TextView
@@ -20,7 +20,7 @@
         android:text="@string/choice_level"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="@color/darkBlack"
+        android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="normal"
         app:fontFamily="@font/rubik_mono_one" />
@@ -34,7 +34,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="500dp"
         android:contentDescription="@string/hard"
-        app:srcCompat="@drawable/trudny" />
+        app:srcCompat="@drawable/hard" />
 
     <ImageView
         android:id="@+id/Medium"
@@ -45,7 +45,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="320dp"
         android:contentDescription="@string/medium"
-        app:srcCompat="@drawable/sredni" />
+        app:srcCompat="@drawable/medium" />
 
     <ImageView
         android:id="@+id/Easy"
@@ -56,6 +56,6 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="140dp"
         android:contentDescription="@string/easy"
-        app:srcCompat="@drawable/latwy" />
+        app:srcCompat="@drawable/easy" />
 
 </RelativeLayout>

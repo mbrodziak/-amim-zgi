@@ -3,15 +3,12 @@
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
             <corners android:radius="1000dp" />
+            <solid android:color="@color/lava" />
             <padding
                 android:bottom="4dp"
                 android:left="4dp"
                 android:right="4dp"
                 android:top="4dp" />
-            <gradient
-                android:startColor="@color/dukeBlue"
-                android:endColor="@color/lava"
-                android:angle="90" />
         </shape>
     </item>
 </selector>

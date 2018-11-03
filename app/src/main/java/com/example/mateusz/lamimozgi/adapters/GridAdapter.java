@@ -38,12 +38,14 @@ public class GridAdapter extends ArrayAdapter<SudokuCell> {
 
         if (Objects.requireNonNull(this.getItem(position)).isEven()){
             view.setBackgroundResource(R.drawable.even_cell_background);
+            ((TextView) view).setTextAppearance(R.style.textStyle);
         }
         if (!Objects.requireNonNull(this.getItem(position)).isEven()){
             view.setBackgroundResource(R.drawable.odd_cell_background);
+            ((TextView) view).setTextAppearance(R.style.textStyle);
         }
         if (Objects.requireNonNull(this.getItem(position)).isHighlighted()) {
-            ((TextView) view).setTextColor(Color.parseColor("#ff0000"));
+            ((TextView) view).setTextColor(Color.parseColor("#CF1020"));
         } else {
             ((TextView) view).setTextColor(Color.parseColor("#ffffff"));
         }if (Objects.requireNonNull(this.getItem(position)).isInitialValue()){

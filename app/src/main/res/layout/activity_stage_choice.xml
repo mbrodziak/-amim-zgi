@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/background7">
 
     <TextView
         android:id="@+id/Text"
@@ -19,9 +19,8 @@
         android:text="@string/choice_stage"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="@color/darkBlack"
+        android:textColor="@android:color/black"
         android:textSize="36sp"
-        android:textStyle="normal"
         app:fontFamily="@font/rubik_mono_one" />
 
     <include
@@ -30,7 +29,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_below="@id/Text"/>
-
-
 
 </RelativeLayout>
