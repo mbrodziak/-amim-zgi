@@ -9,13 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mateusz.lamimozgi.adapters.GridAdapter;
 import com.example.mateusz.lamimozgi.items.SudokuCell;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +33,7 @@ public class SudokuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sudoku);
+        setContentView(R.layout.activity_9x9sudoku);
         app = (GameApplication) getApplication();
         String board = app.selectedStage.getStage();
         String save = app.selectedStage.getSave();
@@ -259,7 +259,7 @@ public class SudokuActivity extends AppCompatActivity {
         for (int i = column; i < content.length; i += BOARD_SIZE) {
             vElements.add(content[i]);
         }
-        return !(vElements.contains(new SudokuCell(0, false, false)) || !vElements.contains(new SudokuCell(0, false, true)) || vElements.size() != BOARD_SIZE);
+        return !(vElements.contains(new SudokuCell(0, false, false)) || vElements.contains(new SudokuCell(0, false, true)) || vElements.size() != BOARD_SIZE);
 }
 
     private boolean traverseHorizontal(int line) {

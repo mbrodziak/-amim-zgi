@@ -44,4 +44,7 @@
     <string name="choice_stage">Co wybierasz?</string>
     <string name="menu">Menu główne Łamimózgów</string>
     <string name="logo">logo</string>
+    <string name="ten">10</string>
+    <string name="eleven">11</string>
+    <string name="twelve">12</string>
 </resources>

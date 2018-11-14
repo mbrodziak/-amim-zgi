@@ -17,6 +17,7 @@ import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_E
 import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_ID;
 import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_NAME;
 import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_SAVE;
+import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_TYPE;
 
 public class GameApplication extends Application {
     public String gameType;
@@ -38,7 +39,10 @@ public class GameApplication extends Application {
             Intent intent = new Intent(getApplicationContext(), SudokuActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-
+        }else if(gameType.equals("unNormalSudoku")){
+            Intent intent = new Intent(getApplicationContext(), SudokuUnActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 
@@ -63,21 +67,40 @@ public class GameApplication extends Application {
         Stage s;
         tasksCursor.moveToFirst();
         if (! tasksCursor.isAfterLast()) {
-            do {
-                String stage_id = tasksCursor.getString(0);
-                String name = tasksCursor.getString(1);
-                String stage = tasksCursor.getString(2);
-                String save = tasksCursor.getString(3);
-                String extra = tasksCursor.getString(4);
-                String boolValue = tasksCursor.getString(5);
-                boolean complete = Boolean.parseBoolean(boolValue);
-                s = new Stage(name, stage, complete);
-                s.setID(stage_id);
-                s.setSave(save);
-                s.setExtra(extra);
-                currentStages.add(s);
-                currentStagesId.add(stage_id);
-            } while(tasksCursor.moveToNext());
+            if (gameType.equals("normalSudoku")){
+                do {
+                    String stage_id = tasksCursor.getString(0);
+                    String name = tasksCursor.getString(1);
+                    String stage = tasksCursor.getString(2);
+                    String save = tasksCursor.getString(3);
+                    String extra = tasksCursor.getString(4);
+                    String boolValue = tasksCursor.getString(5);
+                    boolean complete = Boolean.parseBoolean(boolValue);
+                    s = new Stage(name, stage, complete);
+                    s.setID(stage_id);
+                    s.setSave(save);
+                    s.setExtra(extra);
+                    currentStages.add(s);
+                    currentStagesId.add(stage_id);
+                } while(tasksCursor.moveToNext());
+            }else if (gameType.equals("unNormalSudoku")){
+                do {
+                    String stage_id = tasksCursor.getString(0);
+                    String name = tasksCursor.getString(1);
+                    String stage = tasksCursor.getString(3);
+                    String save = tasksCursor.getString(4);
+                    String extra = tasksCursor.getString(5);
+                    String type = tasksCursor.getString(2);
+                    String boolValue = tasksCursor.getString(6);
+                    boolean complete = Boolean.parseBoolean(boolValue);
+                    s = new Stage(name, stage, type, complete);
+                    s.setID(stage_id);
+                    s.setSave(save);
+                    s.setExtra(extra);
+                    currentStages.add(s);
+                    currentStagesId.add(stage_id);
+                } while(tasksCursor.moveToNext());
+            }
         }
         tasksCursor.close();
     }
@@ -88,17 +111,31 @@ public class GameApplication extends Application {
 
     public void saveStage() {
         assert (null != selectedStage);
+        if (gameType.equals("normalSudoku")){
+            ContentValues values = new ContentValues();
+            values.put(STAGE_NAME, selectedStage.getName());
+            values.put(STAGE, selectedStage.getStage());
+            values.put(STAGE_SAVE, selectedStage.getSave());
+            values.put(STAGE_EXTRA, selectedStage.getExtra());
+            values.put(COMPLETE, Boolean.toString(selectedStage.isComplete()));
 
-        ContentValues values = new ContentValues();
-        values.put(STAGE_NAME, selectedStage.getName());
-        values.put(STAGE, selectedStage.getStage());
-        values.put(STAGE_SAVE, selectedStage.getSave());
-        values.put(STAGE_EXTRA, selectedStage.getExtra());
-        values.put(COMPLETE, Boolean.toString(selectedStage.isComplete()));
+            String id = selectedStage.getID();
+            String where = String.format("%s = '%s'", STAGE_ID, id);
+            String STAGE_TABLE = gameType + gameLevel;
+            database.update(STAGE_TABLE, values, where, null);
+        }else if (gameType.equals("unNormalSudoku")){
+            ContentValues values = new ContentValues();
+            values.put(STAGE_NAME, selectedStage.getName());
+            values.put(STAGE_TYPE, selectedStage.getType());
+            values.put(STAGE, selectedStage.getStage());
+            values.put(STAGE_SAVE, selectedStage.getSave());
+            values.put(STAGE_EXTRA, selectedStage.getExtra());
+            values.put(COMPLETE, Boolean.toString(selectedStage.isComplete()));
 
-        String id = selectedStage.getID();
-        String where = String.format("%s = '%s'", STAGE_ID, id);
-        String STAGE_TABLE = gameType + gameLevel;
-        database.update(STAGE_TABLE, values, where, null);
+            String id = selectedStage.getID();
+            String where = String.format("%s = '%s'", STAGE_ID, id);
+            String STAGE_TABLE = gameType + gameLevel;
+            database.update(STAGE_TABLE, values, where, null);
+        }
     }
 }

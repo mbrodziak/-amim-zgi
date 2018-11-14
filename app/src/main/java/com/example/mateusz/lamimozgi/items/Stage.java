@@ -4,6 +4,7 @@ public class Stage {
     private boolean Complete;
     private String Name;
     private String Stage;
+    private String Type;
     private String ID;
     private String save;
     private String extra;
@@ -11,6 +12,14 @@ public class Stage {
     public Stage(String name, String stage, boolean complete) {
         Name = name;
         Stage = stage;
+        Complete = complete;
+
+    }
+
+    public Stage(String name, String stage, String type, boolean complete) {
+        Name = name;
+        Stage = stage;
+        Type = type;
         Complete = complete;
 
     }
@@ -45,6 +54,10 @@ public class Stage {
 
     public String getExtra() {
         return extra;
+    }
+
+    public String getType() {
+        return Type;
     }
 
     public String getID() {

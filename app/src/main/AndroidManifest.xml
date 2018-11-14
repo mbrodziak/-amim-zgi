@@ -23,6 +23,7 @@
         <activity android:name=".OptionsActivity" />
         <activity android:name=".SudokuActivity" />
         <activity android:name=".StageChoiceActivity" />
+        <activity android:name=".SudokuUnActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
