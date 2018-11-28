@@ -29,8 +29,7 @@ class CrosswordActivity : AppCompatActivity(), CrosswordView.OnLongPressListener
 
         val crossword = readPuzzle(R.raw.puzzle)
 
-        title = getString(R.string.title_by_author,
-                crossword.title, crossword.author)
+        title = getString(R.string.title_by_author, crossword.title, crossword.author)
 
         crosswordView!!.let { cv ->
             cv.crossword = crossword

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
+    android:background="@drawable/background_sudoku"
     android:orientation="vertical">
     <org.akop.ararat.view.CrosswordView
         android:id="@+id/crossword"
@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:minLines="3"
         android:maxLines="3"
-        android:textColor="#fff"
-        android:background="#000"/>
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:background="#CF1020"/>
 </LinearLayout>

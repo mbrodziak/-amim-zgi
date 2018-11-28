@@ -1970,15 +1970,15 @@ class CrosswordView(context: Context, attrs: AttributeSet?) : View(context, attr
         private const val ANSWER_TEXT_SIZE = 7f
         private const val NUMBER_TEXT_STROKE_WIDTH = 1f
 
-        private val NORMAL_CELL_FILL_COLOR = "#ffffff".toColor()
+        private val NORMAL_CELL_FILL_COLOR = "#00009C".toColor()
         private val CHEATED_CELL_FILL_COLOR = "#ff8b85".toColor()
-        private val MISTAKE_CELL_FILL_COLOR = "#ff0000".toColor()
-        private val SELECTED_WORD_FILL_COLOR = "#faeace".toColor()
-        private val SELECTED_CELL_FILL_COLOR = "#ecae44".toColor()
+        private val MISTAKE_CELL_FILL_COLOR = "#CF1020".toColor()
+        private val SELECTED_WORD_FILL_COLOR = "#0000CD".toColor()
+        private val SELECTED_CELL_FILL_COLOR = "#008577".toColor()
         private val MARKED_CELL_FILL_COLOR = "#cedefa".toColor()
-        private val NUMBER_TEXT_COLOR = "#000000".toColor()
-        private val ANSWER_TEXT_COLOR = "#0041b7".toColor()
-        private val CELL_STROKE_COLOR = "#000000".toColor()
+        private val NUMBER_TEXT_COLOR = "#ffffff".toColor()
+        private val ANSWER_TEXT_COLOR = "#00DA00".toColor()
+        private val CELL_STROKE_COLOR = "#FFFFFF".toColor()
         private val CIRCLE_STROKE_COLOR = "#555555".toColor()
     }
 }

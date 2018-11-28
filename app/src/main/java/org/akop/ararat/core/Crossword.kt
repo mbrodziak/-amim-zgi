@@ -10,13 +10,10 @@ import java.util.ArrayList
 import java.util.HashSet
 
 
-class Crossword internal constructor(val width: Int = 0, val height: Int = 0, val squareCount: Int = 0, val flags: Int = 0, val title: String? = null, val description: String? = null, val author: String? = null,
-                                     val copyright: String? = null,
-                                     val comment: String? = null,
-                                     val date: Long = 0,
-                                     wordsAcross: List<Word>? = null,
-                                     wordsDown: List<Word>? = null,
-                                     alphabet: Set<Char>? = null) : Parcelable {
+class Crossword internal constructor(val width: Int = 0, val height: Int = 0, val squareCount: Int = 0, val flags: Int = 0,
+                                     val title: String? = null, val description: String? = null, val author: String? = null,
+                                     val copyright: String? = null, val comment: String? = null, val date: Long = 0,
+                                     wordsAcross: List<Word>? = null, wordsDown: List<Word>? = null, alphabet: Set<Char>? = null) : Parcelable {
 
     val wordsAcross: List<Word> = ArrayList()
     val wordsDown: List<Word> = ArrayList()
