@@ -81,6 +81,37 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 COMPLETE + " text " +
                 ")");
 
+        db.execSQL("create table crossword0 ( " +
+                STAGE_ID + " text primary key not null, " +
+                STAGE_NAME + " text, " +
+                STAGE_TYPE + " text, "+
+                STAGE + " text, " +
+                STAGE_SAVE + " text, " +
+                STAGE_EXTRA + " text, " +
+                COMPLETE + " text " +
+                ")");
+
+        db.execSQL("create table crossword1 ( " +
+                STAGE_ID + " text primary key not null, " +
+                STAGE_NAME + " text, " +
+                STAGE_TYPE + " text, "+
+                STAGE + " text, " +
+                STAGE_SAVE + " text, " +
+                STAGE_EXTRA + " text, " +
+                COMPLETE + " text " +
+                ")");
+
+        db.execSQL("create table crossword2 ( " +
+                STAGE_ID + " text primary key not null, " +
+                STAGE_NAME + " text, " +
+                STAGE_TYPE + " text, "+
+                STAGE + " text, " +
+                STAGE_SAVE + " text, " +
+                STAGE_EXTRA + " text, " +
+                COMPLETE + " text " +
+                ")");
+
+
         db.execSQL("insert into normalSudoku0 (ID, name, stage, save, extra, complete) VALUES ('200','Simple 1', '080020673307105200024073010602010408108006052700842090410208007050760900076400581','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
         db.execSQL("insert into normalSudoku1 (ID, name, stage, save, extra, complete) VALUES ('200','Medium 1', '000100300504030000000200098740980230100020004062045019250007000000090105009002000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
         db.execSQL("insert into normalSudoku2 (ID, name, stage, save, extra, complete) VALUES ('200','Hard 1', '000000025003900004010560900070600540000000000032005060006078090800001200240000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
@@ -99,6 +130,7 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
         db.execSQL("insert into unNormalSudoku2 (ID, name, type, stage, save, extra, complete) VALUES ('200','6x6 1', '000111000111222333222333444555444555','506000000020060000000501004000000103','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
         db.execSQL("insert into unNormalSudoku2 (ID, name, type, stage, save, extra, complete) VALUES ('300','6x6 2', '000111000111222333222333444555444555','006040000500030001400003004010000600','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
         db.execSQL("insert into unNormalSudoku2 (ID, name, type, stage, save, extra, complete) VALUES ('400','6x6 3', '000111000111222333222333444555444555','106000000003000500053020000260010000','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
+        db.execSQL("insert into crossword0 (ID, name, type, stage, save, extra, complete) VALUES ('200','CROSS&DOWN 1', '000111000111222333222333444555444555','106000000003000500053020000260010000','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
     }
 
     @Override

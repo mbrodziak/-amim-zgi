@@ -43,7 +43,11 @@ public class GameApplication extends Application {
             Intent intent = new Intent(getApplicationContext(), SudokuUnActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
+        }else if(gameType.equals("crossword")){
+        Intent intent = new Intent(getApplicationContext(), CrosswordActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
     }
 
     public void resetAllGames() {
@@ -84,6 +88,23 @@ public class GameApplication extends Application {
                     currentStagesId.add(stage_id);
                 } while(tasksCursor.moveToNext());
             }else if (gameType.equals("unNormalSudoku")){
+                do {
+                    String stage_id = tasksCursor.getString(0);
+                    String name = tasksCursor.getString(1);
+                    String stage = tasksCursor.getString(3);
+                    String save = tasksCursor.getString(4);
+                    String extra = tasksCursor.getString(5);
+                    String type = tasksCursor.getString(2);
+                    String boolValue = tasksCursor.getString(6);
+                    boolean complete = Boolean.parseBoolean(boolValue);
+                    s = new Stage(name, stage, type, complete);
+                    s.setID(stage_id);
+                    s.setSave(save);
+                    s.setExtra(extra);
+                    currentStages.add(s);
+                    currentStagesId.add(stage_id);
+                } while(tasksCursor.moveToNext());
+            } else if (gameType.equals("crossword")) {
                 do {
                     String stage_id = tasksCursor.getString(0);
                     String name = tasksCursor.getString(1);
