@@ -20,15 +20,14 @@ class PuzFormatter : CrosswordFormatter {
     }
 
     @Throws(IOException::class)
-    override fun read(builder: Crossword.Builder, inputStream: InputStream) {
+    override fun read(builder: Crossword.Builder, inputStream: InputStream)
+    {
         readWithKey(builder, inputStream, null)
     }
 
     @Throws(IOException::class)
-    fun readWithKey(builder: Crossword.Builder, inputStream: InputStream,
-                    key: Int?) {
-        if (key != null && key !in (0..9999))
-            throw IllegalArgumentException("Key is out of range")
+    fun readWithKey(builder: Crossword.Builder, inputStream: InputStream, key: Int?) {
+        if (key != null && key !in (0..9999)) throw IllegalArgumentException("Key is out of range")
 
         val reader = inputStream.reader(Charset.forName(encoding))
 
@@ -37,12 +36,10 @@ class PuzFormatter : CrosswordFormatter {
 
         // Magic string
         val temp = CharArray(128)
-        if (reader.read(temp, 0, MAGIC_STRING.length) != MAGIC_STRING.length)
-            throw FormatException("Magic string incomplete")
+        if (reader.read(temp, 0, MAGIC_STRING.length) != MAGIC_STRING.length) throw FormatException("Magic string incomplete")
 
         val magic = String(temp, 0, MAGIC_STRING.length)
-        if (MAGIC_STRING != magic)
-            throw FormatException("Magic string mismatch (got '$magic')")
+        if (MAGIC_STRING != magic) throw FormatException("Magic string mismatch (got '$magic')")
 
         // Checksums
         reader.ensureSkip(2) // CIB checksum
@@ -50,8 +47,7 @@ class PuzFormatter : CrosswordFormatter {
         reader.ensureSkip(4) // Masked high checksum
 
         // Version
-        if (reader.read(temp, 0, 4) != 4)
-            throw FormatException("Version information incomplete")
+        if (reader.read(temp, 0, 4) != 4) throw FormatException("Version information incomplete")
 
         // Garbage
         reader.ensureSkip(2)
@@ -183,9 +179,7 @@ class PuzFormatter : CrosswordFormatter {
         val hasSolution = puzzleType != PUZZLE_TYPE_NO_SOLUTION
 
         // If scrambled, unscramble by brute-forcing a key (0000-9999)
-        if (isScrambled && !unlock(charMap, unscrambledChecksum,
-                        if (key == null) 0..9999 else key..key))
-            throw FormatException("Crossword locked, unlock failed")
+        if (isScrambled && !unlock(charMap, unscrambledChecksum, if (key == null) 0..9999 else key..key)) throw FormatException("Crossword locked, unlock failed")
 
         builder.flags = if (hasSolution) 0 else Crossword.FLAG_NO_SOLUTION
         builder.width = width
@@ -218,13 +212,7 @@ class PuzFormatter : CrosswordFormatter {
      */
     override fun canWrite(): Boolean = false
 
-    private fun buildWords(cb: Crossword.Builder,
-                           clues: List<String>,
-                           charMap: Array<CharArray>,
-                           attrMap: Array<ByteArray>,
-                           rebusMap: Array<IntArray>?,
-                           rebusSolutions: SparseArray<String>?,
-                           hasSolution: Boolean) {
+    private fun buildWords(cb: Crossword.Builder, clues: List<String>, charMap: Array<CharArray>, attrMap: Array<ByteArray>, rebusMap: Array<IntArray>?, rebusSolutions: SparseArray<String>?, hasSolution: Boolean) {
         val alphabet = HashSet(Crossword.ALPHABET_ENGLISH)
 
         var clue = 0
@@ -399,9 +387,7 @@ class PuzFormatter : CrosswordFormatter {
         }
     }
 
-    private fun unlock(map: Array<CharArray>,
-                       unscrambledChecksum: Short,
-                       keyRange: IntRange): Boolean {
+    private fun unlock(map: Array<CharArray>, unscrambledChecksum: Short, keyRange: IntRange): Boolean {
         val height = map.size
         if (height == 0) return false
         val width = map[0].size

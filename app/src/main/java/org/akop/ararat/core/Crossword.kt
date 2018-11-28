@@ -10,13 +10,7 @@ import java.util.ArrayList
 import java.util.HashSet
 
 
-class Crossword internal constructor(val width: Int = 0,
-                                     val height: Int = 0,
-                                     val squareCount: Int = 0,
-                                     val flags: Int = 0,
-                                     val title: String? = null,
-                                     val description: String? = null,
-                                     val author: String? = null,
+class Crossword internal constructor(val width: Int = 0, val height: Int = 0, val squareCount: Int = 0, val flags: Int = 0, val title: String? = null, val description: String? = null, val author: String? = null,
                                      val copyright: String? = null,
                                      val comment: String? = null,
                                      val date: Long = 0,
@@ -52,7 +46,7 @@ class Crossword internal constructor(val width: Int = 0,
     val cellMap: Array<Array<Cell?>> by lazy { buildMap() }
     val hash: String by lazy { femputeHash() }
 
-    class Builder() {
+    class Builder {
 
         @set:JvmName("width")
         var width: Int = 0
@@ -75,71 +69,6 @@ class Crossword internal constructor(val width: Int = 0,
 
         val alphabet: MutableSet<Char> = HashSet(ALPHABET_ENGLISH)
         val words: MutableList<Word> = ArrayList()
-
-        constructor(crossword: Crossword): this() {
-            width = crossword.width
-            height = crossword.height
-            title = crossword.title
-            description = crossword.description
-            author = crossword.author
-            comment = crossword.comment
-            copyright = crossword.copyright
-            date = crossword.date
-            flags = crossword.flags
-            alphabet.clear()
-            alphabet += crossword.alphabet
-            words += crossword.wordsAcross + crossword.wordsDown
-        }
-
-        fun setWidth(value: Int): Builder {
-            width = value
-            return this
-        }
-
-        fun setHeight(value: Int): Builder {
-            height = value
-            return this
-        }
-
-        fun setTitle(text: String?): Builder {
-            title = text
-            return this
-        }
-
-        fun setDescription(text: String?): Builder {
-            description = text
-            return this
-        }
-
-        fun setAuthor(text: String?): Builder {
-            author = text
-            return this
-        }
-
-        fun setCopyright(text: String?): Builder {
-            copyright = text
-            return this
-        }
-
-        fun setComment(text: String?): Builder {
-            comment = text
-            return this
-        }
-
-        fun setDate(value: Long): Builder {
-            date = value
-            return this
-        }
-
-        fun setFlags(value: Int): Builder {
-            flags = value
-            return this
-        }
-
-        fun addWord(word: Word): Builder {
-            words += word
-            return this
-        }
 
         fun setAlphabet(alphabet: Set<Char>): Builder {
             this.alphabet.clear()
@@ -175,43 +104,6 @@ class Crossword internal constructor(val width: Int = 0,
 
             return count
         }
-
-        /* FIXME
-        fun autoNumber() {
-            // autonumber left-to-right, top-to-bottom
-            val tuples = Array(words.size) { IntArray(4) }
-            var i = 0
-            val n = words.size
-            while (i < n) {
-                val word = words[i]
-                tuples[i] = intArrayOf(i, word.startRow, word.startColumn, word.direction)
-                i++
-            }
-            Arrays.sort(tuples, Comparator { lhs, rhs ->
-                if (lhs[1] != rhs[1]) { // sort by row
-                    return@Comparator lhs[1] - rhs[1]
-                }
-                if (lhs[2] != rhs[2]) { // sort by column
-                    return@Comparator lhs[2] - rhs[2]
-                }
-                if (lhs[3] != rhs[3]) { // sort by direction
-                    if (lhs[3] == Word.DIR_ACROSS) -1 else 1
-                } else 0
-                // Should never get here
-            })
-            var pr = -1
-            var pc = -1
-            var number = 0
-            for (tuple in tuples) {
-                if (pr != tuple[1] || pc != tuple[2]) {
-                    number++
-                }
-                words[tuple[0]].number = number
-                pr = tuple[1]
-                pc = tuple[2]
-            }
-        }
-        */
 
         fun build(): Crossword = Crossword(
                 width = width,
@@ -286,20 +178,6 @@ class Crossword internal constructor(val width: Int = 0,
         return when (direction) {
             Word.DIR_ACROSS -> wordsAcross[index]
             Word.DIR_DOWN -> wordsDown[index]
-            else -> throw IllegalArgumentException("Invalid word direction")
-        }
-    }
-
-    fun findWord(direction: Int, row: Int, column: Int): Word? {
-        return when (direction) {
-            Word.DIR_ACROSS -> wordsAcross.firstOrNull {
-                it.startRow == row && column >= it.startColumn
-                        && column < it.startColumn + it.length
-            }
-            Word.DIR_DOWN -> wordsDown.firstOrNull {
-                it.startColumn == column && row >= it.startRow
-                        && row < it.startRow + it.length
-            }
             else -> throw IllegalArgumentException("Invalid word direction")
         }
     }
@@ -401,11 +279,7 @@ class Crossword internal constructor(val width: Int = 0,
 
     override fun equals(other: Any?): Boolean = (other as? Crossword)?.hash == hash
 
-    class Cell internal constructor(val chars: String = "",
-                                    val attrFlags: Byte = 0): Parcelable {
-
-        val isEmpty: Boolean
-            get() = chars.isEmpty()
+    class Cell internal constructor(val chars: String = "", val attrFlags: Byte = 0): Parcelable {
 
         val isCircled: Boolean
             get() = attrFlags.toInt() and ATTR_CIRCLED == ATTR_CIRCLED
@@ -489,43 +363,6 @@ class Crossword internal constructor(val width: Int = 0,
             @set:JvmName("citation")
             var citation: String? = null
             val cells = ArrayList<Cell>()
-
-            fun setNumber(value: Int): Builder {
-                number = value
-                return this
-            }
-
-            fun setHint(text: String?): Builder {
-                hint = text
-                return this
-            }
-
-            fun setStartRow(value: Int): Builder {
-                startRow = value
-                return this
-            }
-
-            fun setStartColumn(value: Int): Builder {
-                startColumn = value
-                return this
-            }
-
-            fun setDirection(value: Int): Builder {
-                direction = value
-                return this
-            }
-
-            fun setHintUrl(text: String?): Builder {
-                hintUrl = text
-                return this
-            }
-
-            fun setCitation(text: String?): Builder {
-                citation = text
-                return this
-            }
-
-            fun addCell(ch: Char, attrFlags: Int = 0) = addCell(ch.toString(), attrFlags)
 
             fun addCell(chars: String, attrFlags: Int = 0) {
                 cells.add(Cell(chars, attrFlags.toByte()))
@@ -630,12 +467,8 @@ class Crossword internal constructor(val width: Int = 0,
     }
 }
 
-fun buildCrossword(block: Crossword.Builder.() -> Unit): Crossword =
-        Crossword.Builder().apply {
-            block(this)
-        }.build()
+fun buildCrossword(block: Crossword.Builder.() -> Unit):
+        Crossword = Crossword.Builder().apply { block(this) }.build()
 
-fun buildWord(block: Crossword.Word.Builder.() -> Unit): Crossword.Word =
-        Crossword.Word.Builder().apply {
-            block(this)
-        }.build()
+fun buildWord(block: Crossword.Word.Builder.() -> Unit):
+        Crossword.Word = Crossword.Word.Builder().apply { block(this) }.build()

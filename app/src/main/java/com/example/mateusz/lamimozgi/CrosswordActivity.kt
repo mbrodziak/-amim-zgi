@@ -86,28 +86,25 @@ class CrosswordActivity : AppCompatActivity(), CrosswordView.OnLongPressListener
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onCellLongPressed(view: CrosswordView,
-                                   word: Crossword.Word, cell: Int) {
-        Toast.makeText(this, "Show popup menu for " + word.hint!!,
-                Toast.LENGTH_SHORT).show()
+    override fun onCellLongPressed(view: CrosswordView, word: Crossword.Word, cell: Int)
+    {
+        Toast.makeText(this, "Show popup menu for " + word.hint!!, Toast.LENGTH_SHORT).show()
     }
 
     override fun onCrosswordChanged(view: CrosswordView) {}
 
-    override fun onCrosswordSolved(view: CrosswordView) {
-        Toast.makeText(this, R.string.youve_solved_the_puzzle,
-                Toast.LENGTH_SHORT).show()
+    override fun onCrosswordSolved(view: CrosswordView)
+    {
+        Toast.makeText(this, R.string.youve_solved_the_puzzle, Toast.LENGTH_SHORT).show()
     }
 
     override fun onCrosswordUnsolved(view: CrosswordView) { }
 
-    private fun readPuzzle(@RawRes resourceId: Int): Crossword =
-            resources.openRawResource(resourceId).use { s ->
-                buildCrossword { PuzFormatter().read(this, s) }
-            }
+    private fun readPuzzle(@RawRes resourceId: Int):
+            Crossword = resources.openRawResource(resourceId).use{ s -> buildCrossword{ PuzFormatter().read(this, s) } }
 
-    override fun onSelectionChanged(view: CrosswordView,
-                                    word: Crossword.Word?, position: Int) {
+    override fun onSelectionChanged(view: CrosswordView, word: Crossword.Word?, position: Int)
+    {
         hint!!.text = when (word?.direction) {
             Crossword.Word.DIR_ACROSS -> getString(R.string.across, word.number, word.hint)
             Crossword.Word.DIR_DOWN -> getString(R.string.down, word.number, word.hint)
