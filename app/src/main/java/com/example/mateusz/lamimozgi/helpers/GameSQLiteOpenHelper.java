@@ -13,6 +13,8 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
     public static final String STAGE_SAVE = "save";
     public static final String STAGE_EXTRA = "extra";
     public static final String STAGE_TYPE = "type";
+    public static final String STAGE_WIDTH = "width";
+    public static final String STAGE_HEIGHT = "height";
 
     public GameSQLiteOpenHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
@@ -58,6 +60,8 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 STAGE + " text, " +
                 STAGE_SAVE + " text, " +
                 STAGE_EXTRA + " text, " +
+                STAGE_WIDTH + " integer, " +
+                STAGE_HEIGHT + " integer, " +
                 COMPLETE + " text " +
                 ")");
 
@@ -68,6 +72,8 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 STAGE + " text, " +
                 STAGE_SAVE + " text, " +
                 STAGE_EXTRA + " text, " +
+                STAGE_WIDTH + " integer, " +
+                STAGE_HEIGHT + " integer, " +
                 COMPLETE + " text " +
                 ")");
 
@@ -78,6 +84,8 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 STAGE + " text, " +
                 STAGE_SAVE + " text, " +
                 STAGE_EXTRA + " text, " +
+                STAGE_WIDTH + " integer, " +
+                STAGE_HEIGHT + " integer, " +
                 COMPLETE + " text " +
                 ")");
 
@@ -88,6 +96,8 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 STAGE + " text, " +
                 STAGE_SAVE + " text, " +
                 STAGE_EXTRA + " text, " +
+                STAGE_WIDTH + " integer, " +
+                STAGE_HEIGHT + " integer, " +
                 COMPLETE + " text " +
                 ")");
 
@@ -98,6 +108,8 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 STAGE + " text, " +
                 STAGE_SAVE + " text, " +
                 STAGE_EXTRA + " text, " +
+                STAGE_WIDTH + " integer, " +
+                STAGE_HEIGHT + " integer, " +
                 COMPLETE + " text " +
                 ")");
 
@@ -108,6 +120,8 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 STAGE + " text, " +
                 STAGE_SAVE + " text, " +
                 STAGE_EXTRA + " text, " +
+                STAGE_WIDTH + " integer, " +
+                STAGE_HEIGHT + " integer, " +
                 COMPLETE + " text " +
                 ")");
 
@@ -118,19 +132,23 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
         db.execSQL("insert into normalSudoku0 (ID, name, stage, save, extra, complete) VALUES ('300','Simple 2', '073650001080070009050001002000000060012058003000000070070006010008007020000169400','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
         db.execSQL("insert into normalSudoku1 (ID, name, stage, save, extra, complete) VALUES ('300','Medium 2', '000052096020097001000400007260000150300000002057000043400006000700940020930570000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
         db.execSQL("insert into normalSudoku2 (ID, name, stage, save, extra, complete) VALUES ('300','Hard 2', '006027000150030000400000007080100040500704009070008010200000006000080034000970100','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
-        db.execSQL("insert into normalSudoku0 (ID, name, stage, save, extra, complete) VALUES ('400','Simple 3', '0480050073000004060027000000036060002000000010005013000000031001404000008800600520','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
-        db.execSQL("insert into normalSudoku1 (ID, name, stage, save, extra, complete) VALUES ('400','Medium 3', '200300046006005100450000070207000100002000080040030600000805002800600180004002','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
+        db.execSQL("insert into normalSudoku0 (ID, name, stage, save, extra, complete) VALUES ('400','Simple 3', '048005007300000406002700000003606000200000001000501300000003100140400000880060200','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
+        db.execSQL("insert into normalSudoku1 (ID, name, stage, save, extra, complete) VALUES ('400','Medium 3', '200300046006005100450000070207000100002000080040030600000805002800600180004002050','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
         db.execSQL("insert into normalSudoku2 (ID, name, stage, save, extra, complete) VALUES ('400','Hard 3', '007450300500008000090027501040000900900000003005000040206870030000600005003019200','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
-        db.execSQL("insert into unNormalSudoku0 (ID, name, type, stage, save, extra, complete) VALUES ('200','6x6 1', '000111000111222333222333444555444555','216000300261000315531420620004004632','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
-        db.execSQL("insert into unNormalSudoku0 (ID, name, type, stage, save, extra, complete) VALUES ('300','6x6 2', '000111000111222333222333444555444555','050001004600400050100004043000060240','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
-        db.execSQL("insert into unNormalSudoku0 (ID, name, type, stage, save, extra, complete) VALUES ('400','6x6 3', '000111000111222333222333444555444555','504000600035120000000600001003403062','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
-        db.execSQL("insert into unNormalSudoku1 (ID, name, type, stage, save, extra, complete) VALUES ('200','6x6 1', '000111000111222333222333444555444555','030605040000300000000360505006000501','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
-        db.execSQL("insert into unNormalSudoku1 (ID, name, type, stage, save, extra, complete) VALUES ('300','6x6 2', '000111000111222333222333444555444555','102000000030060200000403050004400601','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
-        db.execSQL("insert into unNormalSudoku1 (ID, name, type, stage, save, extra, complete) VALUES ('400','6x6 3', '000111000111222333222333444555444555','000013102000006500200301000006050030','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
-        db.execSQL("insert into unNormalSudoku2 (ID, name, type, stage, save, extra, complete) VALUES ('200','6x6 1', '000111000111222333222333444555444555','506000000020060000000501004000000103','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
-        db.execSQL("insert into unNormalSudoku2 (ID, name, type, stage, save, extra, complete) VALUES ('300','6x6 2', '000111000111222333222333444555444555','006040000500030001400003004010000600','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
-        db.execSQL("insert into unNormalSudoku2 (ID, name, type, stage, save, extra, complete) VALUES ('400','6x6 3', '000111000111222333222333444555444555','106000000003000500053020000260010000','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
-        db.execSQL("insert into crossword0 (ID, name, type, stage, save, extra, complete) VALUES ('200','CROSS&DOWN 1', '---.-----.--------.-----.--------.----------------...-----------.---.------------------...---.-----..---------.---.---------..-----.---...------------------.---.-----------...----------------.--------.-----.--------.-----.---','WOK.THEQT.SCRIPANI.AURUM.OHARATEN.GRAINSLAVESEGGOS...THERENTRAJA.DIS.WILDESSTARINGWHALE...HIM.CANOE..SMSSEVERY.ORL.DICTADESE..RELEE.MAT...MATEANDGRATESIDIBE.TOO.ONUSACETATE...ZESTABAITTHEHATE.IOUEMCEE.LOHAN.ORCREEDS.SPANO.NYE','000000000000000000000000000000000000','000000000000000000000000000000000000','false');");
+        db.execSQL("insert into unNormalSudoku0 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('200','6x6 1', '000111000111222333222333444555444555','216000300261000315531420620004004632','000000000000000000000000000000000000','000000000000000000000000000000000000',6,6,'false');");
+        db.execSQL("insert into unNormalSudoku0 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('300','6x6 2', '000111000111222333222333444555444555','050001004600400050100004043000060240','000000000000000000000000000000000000','000000000000000000000000000000000000',6,6,'false');");
+        db.execSQL("insert into unNormalSudoku0 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('400','6x6 3', '000111000111222333222333444555444555','504000600035120000000600001003403062','000000000000000000000000000000000000','000000000000000000000000000000000000',6,6,'false');");
+        db.execSQL("insert into unNormalSudoku1 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('200','6x6 1', '000111000111222333222333444555444555','030605040000300000000360505006000501','000000000000000000000000000000000000','000000000000000000000000000000000000',6,6,'false');");
+        db.execSQL("insert into unNormalSudoku1 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('300','6x6 2', '000111000111222333222333444555444555','102000000030060200000403050004400601','000000000000000000000000000000000000','000000000000000000000000000000000000',6,6,'false');");
+        db.execSQL("insert into unNormalSudoku1 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('400','6x6 3', '000111000111222333222333444555444555','000013102000006500200301000006050030','000000000000000000000000000000000000','000000000000000000000000000000000000',6,6,'false');");
+        db.execSQL("insert into unNormalSudoku2 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('200','6x6 1', '000111000111222333222333444555444555','506000000020060000000501004000000103','000000000000000000000000000000000000','000000000000000000000000000000000000',6,6,'false');");
+        db.execSQL("insert into unNormalSudoku2 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('300','6x6 2', '000111000111222333222333444555444555','006040000500030001400003004010000600','000000000000000000000000000000000000','000000000000000000000000000000000000',6,6,'false');");
+        db.execSQL("insert into unNormalSudoku2 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('400','6x6 3', '000111000111222333222333444555444555','106000000003000500053020000260010000','000000000000000000000000000000000000','000000000000000000000000000000000000',6,6,'false');");
+        db.execSQL("insert into crossword0 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('200','CROSS&DOWN 1', " +
+                "'-----.------.-.---.-.------.------.-.---.-.------.------.....-.-.-.---------.-.-.-.....------.------.-.---.-.------.------.-.---.-.------.-----'," +
+                "'URLOP.POMOCC.A.LEE.I.HZAMKI.LEGARO.U.SKI.L.ZNISZA.KRATAA.....A.N.N.BRATANICA.O.E.R.....SDYCHA.DEDALS.I.MAZ.E.EKOTEW.WYSYPO.A.ALI.E.IKULEJ.GORCE'," +
+                "'-----.------.-.---.-.------.------.-.---.-.------.------.....-.-.-.---------.-.-.-.....------.------.-.---.-.------.------.-.---.-.------.-----'," +
+                "'000000000000000000000000000000000000',11,13,'false');");
     }
 
     @Override

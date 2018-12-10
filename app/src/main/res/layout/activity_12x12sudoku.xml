@@ -13,9 +13,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@drawable/round_textview2"
+        android:background="@drawable/round_text_view2"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
@@ -27,7 +27,7 @@
         layout="@layout/sudoku12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="0dp"
         android:layout_below="@id/Text"/>
 
 

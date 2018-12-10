@@ -6,58 +6,55 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mateusz.lamimozgi.adapters.GridAdapter;
+import com.example.mateusz.lamimozgi.adapters.SudokuGridAdapter;
 import com.example.mateusz.lamimozgi.items.SudokuCell;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class SudokuActivity extends AppCompatActivity {
-
-    private static final int BOARD_SIZE = 9;
     private GameApplication app;
     private SudokuCell[] content;
     private GridView gameBoard;
+    private int BOARD_SIZE;
     private TextView viewInFocus;
     private int positionInFocus;
     private Drawable res;
+    private ArrayList<ArrayList<Integer>> group;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_9x9sudoku);
         app = (GameApplication) getApplication();
         String board = app.selectedStage.getStage();
         String save = app.selectedStage.getSave();
         String mark = app.selectedStage.getExtra();
-        System.out.println(save);
-        System.out.println(mark);
-        content = fromPuzzleString(board, save, mark);
+        String type = app.selectedStage.getType();
+        BOARD_SIZE = app.selectedStage.getWidth();
+        group = new ArrayList<>();
+        for (int i = 0; i < BOARD_SIZE; i++){
+            group.add(new ArrayList<Integer>());
+        }
+        content = fromPuzzleString(board, save, mark, type);
         setUpViews();
     }
 
-    private SudokuCell[] fromPuzzleString(String string, String save, String mark) {
+    private SudokuCell[] fromPuzzleString(String string, String save, String mark, String type) {
         SudokuCell[] puz = new SudokuCell[string.length()];
         for (int i = 0; i < puz.length; i++) {
             int value = string.charAt(i) - '0';
             int saveValue = save.charAt(i) - '0';
             int markValue = mark.charAt(i) - '0';
-
-            int modI9 = i%9;
-            boolean isEven = modI9<= 2 || modI9>=6;
-            if (i>=27&&i<=53){
-                isEven=!isEven;
-            }
+            int typeValue = type.charAt(i) - '0';
             boolean isHighlighted = false;
             boolean isInitial = true;
+            boolean isEven = false;
+
             if (value == 0) {
                 isInitial = false;
             }
@@ -68,6 +65,14 @@ public class SudokuActivity extends AppCompatActivity {
                 value = markValue;
                 isHighlighted = true;
             }
+            if (BOARD_SIZE == 6){
+                isEven = typeValue==0||typeValue==3||typeValue==4;
+            }else if (BOARD_SIZE == 9){
+                isEven = typeValue==0||typeValue==2||typeValue==4||typeValue==6||typeValue==8;
+            }else if (BOARD_SIZE == 12){
+                isEven = typeValue==0||typeValue==2||typeValue==4||typeValue==6||typeValue==8||typeValue==10;
+            }
+            add(typeValue, i);
             SudokuCell sc = new SudokuCell(value, isInitial, isEven);
             sc.setHighlighted(isHighlighted);
             puz[i] = sc;
@@ -75,126 +80,72 @@ public class SudokuActivity extends AppCompatActivity {
         return puz;
     }
 
+    private void add(int typeValue, int e) {
+        group.get(typeValue).add(e);
+    }
+
     private void setUpViews() {
+        if (BOARD_SIZE == 6){
+            setContentView(R.layout.activity_6x6sudoku);
+        }else if(BOARD_SIZE == 9){
+            setContentView(R.layout.activity_9x9sudoku);
+            setUpViews9();
+        }else if(BOARD_SIZE == 12){
+            setContentView(R.layout.activity_12x12sudoku);
+            setUpViews9();
+            setUpViews12();
+        }
+
         gameBoard = findViewById(R.id.sudokuGrid);
-        Button one = findViewById(R.id.button1Value);
-        Button two = findViewById(R.id.button2Value);
-        Button three = findViewById(R.id.button3Value);
-        Button four = findViewById(R.id.button4Value);
-        Button five = findViewById(R.id.button5Value);
-        Button six = findViewById(R.id.button6Value);
-        Button seven = findViewById(R.id.button7Value);
-        Button eight = findViewById(R.id.button8Value);
-        Button nine = findViewById(R.id.button9Value);
-        Button check = findViewById(R.id.buttonCheckBoard);
-        Button mark = findViewById(R.id.buttonMarkValue);
-        Button clear = findViewById(R.id.buttonNullValue);
-        TextView text = findViewById(R.id.Text);
-        text.setText(app.selectedStage.getName());
-        ListAdapter adapter = new GridAdapter(this, R.layout.grid_cell_layout, content);
-        gameBoard.setAdapter(adapter);
-        gameBoard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (viewInFocus != null) {
-                    viewInFocus.setBackground(res);
-                }
-                viewInFocus = (TextView) view;
-                positionInFocus = position;
-                res = view.getBackground();
-                view.setBackgroundResource(R.drawable.selected_cell_background);
-            }
-        });
-
-        one.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setValueInSelectedView(1);
-            }
-        });
-
-        two.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setValueInSelectedView(2);
-            }
-        });
-
-        three.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setValueInSelectedView(3);
-            }
-        });
-
-        four.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setValueInSelectedView(4);
-            }
-        });
-
-        five.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setValueInSelectedView(5);
-
-            }
-        });
-
-        six.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setValueInSelectedView(6);
-            }
-        });
-
-        seven.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setValueInSelectedView(7);
-            }
-        });
-
-        eight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setValueInSelectedView(8);
-            }
-        });
-
-        nine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setValueInSelectedView(9);
-            }
-        });
-
-        mark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (positionInFocus != -1) {
-                    boolean isMarked = content[positionInFocus].isHighlighted();
-                    content[positionInFocus].setHighlighted(!isMarked);
-                    ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
-                }
-            }
-        });
-
-        clear.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.buttonNullValue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setValueInSelectedView(0);
             }
         });
-
-        check.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button1Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(1);
+            }
+        });
+        findViewById(R.id.button2Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(2);
+            }
+        });
+        findViewById(R.id.button3Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(3);
+            }
+        });
+        findViewById(R.id.button4Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(4);
+            }
+        });
+        findViewById(R.id.button5Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(5);
+            }
+        });
+        findViewById(R.id.button6Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(6);
+            }
+        });
+        findViewById(R.id.buttonCheckBoard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean solved = true;
 
                 for (int i = 0; i < BOARD_SIZE; i++) {
-                    if (!traverseHorizontal(i) || !traverseVertical(i) || !traverseSquareGroups(i)) {
+                    if (traverseHorizontal(i) || traverseVertical(i) || traverseSquareGroups(i)) {
                         solved = false;
                         break;
                     }
@@ -209,7 +160,108 @@ public class SudokuActivity extends AppCompatActivity {
                 }
             }
         });
+        findViewById(R.id.buttonMarkValue).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (positionInFocus != -1) {
+                    boolean isMarked = content[positionInFocus].isHighlighted();
+                    content[positionInFocus].setHighlighted(!isMarked);
+                    ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
+                }
+            }
+        });
+        TextView text = findViewById(R.id.Text);
+        text.setText(app.selectedStage.getName());
+        gameBoard.setNumColumns(BOARD_SIZE);
+        gameBoard.setAdapter(new SudokuGridAdapter(this, R.layout.sudoku_grid_cell_layout, content));
+        gameBoard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (viewInFocus != null) {
+                    viewInFocus.setBackground(res);
+                }
+                viewInFocus = (TextView) view;
+                positionInFocus = position;
+                res = view.getBackground();
+                view.setBackgroundResource(R.drawable.selected_cell_background);
+            }
+        });
+    }
 
+    private void setUpViews9() {
+        findViewById(R.id.button7Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(7);
+            }
+        });
+
+        findViewById(R.id.button8Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(8);
+            }
+        });
+
+        findViewById(R.id.button9Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(9);
+            }
+        });
+    }
+
+    private void setUpViews12() {
+        findViewById(R.id.button10Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(10);
+            }
+        });
+        findViewById(R.id.button11Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(11);
+            }
+        });
+        findViewById(R.id.button12Value).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setValueInSelectedView(12);
+            }
+        });
+    }
+
+    private boolean traverseSquareGroups(int gp) {
+        Set<SudokuCell> gElements = new HashSet<>();
+        boolean isEven = gp % 2 == 0;
+        for (int i = 0; i < BOARD_SIZE; i++){
+            gElements.add(content[group.get(gp).get(i)]);
+        }
+        return gElements.contains(new SudokuCell(0, false, isEven)) || gElements.size() != BOARD_SIZE;
+    }
+
+    private boolean traverseVertical(int column) {
+        Set<SudokuCell> vElements = new HashSet<>();
+        for (int i = column; i < content.length; i += BOARD_SIZE) {
+            vElements.add(content[i]);
+        }
+        return vElements.contains(new SudokuCell(0, false, false)) || vElements.contains(new SudokuCell(0, false, true)) || vElements.size() != BOARD_SIZE;
+    }
+
+    private boolean traverseHorizontal(int line) {
+        int startPoint = line*BOARD_SIZE;
+        int endPoint = startPoint+(BOARD_SIZE);
+        Set<SudokuCell> hElements = new HashSet<>(Arrays.asList(content).subList(startPoint, endPoint));
+
+        return hElements.contains(new SudokuCell(0, false, false)) || hElements.contains(new SudokuCell(0, false, true)) || hElements.size() != BOARD_SIZE;
+    }
+
+    private void setValueInSelectedView(int value) {
+        if (positionInFocus != -1) {
+            content[positionInFocus].setValue(value);
+            ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
+        }
     }
 
     private void toPuzzleString() {
@@ -231,50 +283,6 @@ public class SudokuActivity extends AppCompatActivity {
         }
         app.selectedStage.setExtra(bufMark.toString());
         app.selectedStage.setSave(bufSave.toString());
-    }
-
-    private boolean traverseSquareGroups(int group) {
-        Set<SudokuCell> gElements = new HashSet<>();
-        boolean isEven = group % 2 == 0;
-        int groupIndex = 3*(6*(group/3)+group);
-        System.out.println(groupIndex);
-
-        gElements.add(content[groupIndex]);
-        gElements.add(content[groupIndex+1]);
-        gElements.add(content[groupIndex+2]);
-
-        gElements.add(content[(groupIndex)+BOARD_SIZE]);
-        gElements.add(content[(groupIndex)+BOARD_SIZE+1]);
-        gElements.add(content[(groupIndex)+BOARD_SIZE+2]);
-
-        gElements.add(content[(groupIndex)+(BOARD_SIZE*2)]);
-        gElements.add(content[(groupIndex)+(BOARD_SIZE*2)+1]);
-        gElements.add(content[(groupIndex)+(BOARD_SIZE*2)+2]);
-
-        return !(gElements.contains(new SudokuCell(0, false, isEven)) || gElements.size() != BOARD_SIZE);
-    }
-
-    private boolean traverseVertical(int column) {
-        Set<SudokuCell> vElements = new HashSet<>();
-        for (int i = column; i < content.length; i += BOARD_SIZE) {
-            vElements.add(content[i]);
-        }
-        return !(vElements.contains(new SudokuCell(0, false, false)) || vElements.contains(new SudokuCell(0, false, true)) || vElements.size() != BOARD_SIZE);
-}
-
-    private boolean traverseHorizontal(int line) {
-        int startPoint = line*BOARD_SIZE;
-        int endPoint = startPoint+(BOARD_SIZE);
-        Set<SudokuCell> hElements = new HashSet<>(Arrays.asList(content).subList(startPoint, endPoint));
-
-        return !(hElements.contains(new SudokuCell(0, false, false)) || hElements.contains(new SudokuCell(0, false, true)) || hElements.size() != BOARD_SIZE);
-    }
-
-    private void setValueInSelectedView(int value) {
-        if (positionInFocus != -1) {
-            content[positionInFocus].setValue(value);
-            ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
-        }
     }
 
     protected void onPause() {

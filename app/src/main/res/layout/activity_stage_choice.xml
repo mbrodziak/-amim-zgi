@@ -15,7 +15,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="63dp"
         android:layout_marginEnd="0dp"
-        android:background="@drawable/round_textview"
+        android:background="@drawable/round_text_view"
         android:text="@string/choice_stage"
         android:textAlignment="center"
         android:textAllCaps="true"

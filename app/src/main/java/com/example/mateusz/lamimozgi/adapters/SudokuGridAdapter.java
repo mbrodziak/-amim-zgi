@@ -1,11 +1,8 @@
 package com.example.mateusz.lamimozgi.adapters;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -16,9 +13,9 @@ import com.example.mateusz.lamimozgi.items.SudokuCell;
 
 import java.util.Objects;
 
-public class GridAdapter extends ArrayAdapter<SudokuCell> {
+public class SudokuGridAdapter extends ArrayAdapter<SudokuCell> {
 
-    public GridAdapter(Context context, int textViewResId, SudokuCell[] cells) {
+    public SudokuGridAdapter(Context context, int textViewResId, SudokuCell[] cells) {
         super(context, textViewResId, cells);
     }
 

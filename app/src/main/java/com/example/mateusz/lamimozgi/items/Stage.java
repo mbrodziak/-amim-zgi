@@ -1,6 +1,8 @@
 package com.example.mateusz.lamimozgi.items;
 
 public class Stage {
+    private int Height;
+    private int Width;
     private boolean Complete;
     private String Name;
     private String Stage;
@@ -9,18 +11,13 @@ public class Stage {
     private String save;
     private String extra;
 
-    public Stage(String name, String stage, boolean complete) {
+    public Stage(String name, String stage, int width, int height, String type, boolean complete) {
         Name = name;
         Stage = stage;
         Complete = complete;
-
-    }
-
-    public Stage(String name, String stage, String type, boolean complete) {
-        Name = name;
-        Stage = stage;
+        Width = width;
+        Height = height;
         Type = type;
-        Complete = complete;
 
     }
 
@@ -66,5 +63,13 @@ public class Stage {
 
     public void setComplete(boolean complete) {
         this.Complete = complete;
+    }
+
+    public int getWidth() {
+        return Width;
+    }
+
+    public int getHeight() {
+        return  Height;
     }
 }
