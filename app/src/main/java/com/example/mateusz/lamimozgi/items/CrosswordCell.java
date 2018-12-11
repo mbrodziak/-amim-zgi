@@ -43,6 +43,10 @@ public class CrosswordCell {
         return isHighlight;
     }
 
+    public void setHighlight(boolean highlight) {
+        this.isHighlight = highlight;
+    }
+
     public boolean isSelected() {
         return isSelected;
     }

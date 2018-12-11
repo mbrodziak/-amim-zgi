@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.mateusz.lamimozgi.adapters.CrosswordGridAdapter;
 import com.example.mateusz.lamimozgi.items.CrosswordCell;
 
+import java.util.ArrayList;
+
 public class CrosswordActivity extends AppCompatActivity {
     private GameApplication app;
     private int BOARD_WIDTH;
@@ -19,8 +21,9 @@ public class CrosswordActivity extends AppCompatActivity {
     private CrosswordCell[] content;
     private GridView gameBoard;
     private int positionInFocus = -1;
-    private boolean isHorizontal = true;
+    private boolean isHorizontal;
     private int lastPositionInFocus;
+    private ArrayList<Integer> highlightPositions = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -246,15 +249,103 @@ public class CrosswordActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (positionInFocus != -1){
+                if (positionInFocus != -1) {
                     content[lastPositionInFocus].setSelected(false);
+                    for (int e : highlightPositions) {
+                        content[e].setHighlight(false);
+                    }
+                    highlightPositions = new ArrayList<>();
                 }
-                positionInFocus = position;
-                content[positionInFocus].setSelected(true);
-                lastPositionInFocus = positionInFocus;
+                if (position == positionInFocus){
+                    content[positionInFocus].setSelected(true);
+                    if (!isHorizontal){
+                        if (position > 0 && position < BOARD_HEIGHT * BOARD_WIDTH - 1) {
+                            if (content[position + 1].isEven() || content[position - 1].isEven()) {
+                                isHorizontal = !isHorizontal;
+                            }
+                        }
+                    }else{
+                        if (position - BOARD_WIDTH > 0 && position + BOARD_WIDTH < BOARD_WIDTH * BOARD_HEIGHT - 1) {
+                            if (content[position + BOARD_WIDTH].isEven() || content[position - BOARD_WIDTH].isEven()) {
+                                isHorizontal = !isHorizontal;
+                            }
+                        }
+                    }
+
+                    highlight(position);
+                }else {
+                    positionInFocus = position;
+                    content[positionInFocus].setSelected(true);
+                    lastPositionInFocus = positionInFocus;
+
+                    if (position > 0 && position < BOARD_HEIGHT * BOARD_WIDTH - 1) {
+                        if (content[position + 1].isEven() || content[position - 1].isEven()) {
+                            isHorizontal = true;
+                        }
+                    }
+                    if (position - BOARD_WIDTH > 0 && position + BOARD_WIDTH < BOARD_WIDTH * BOARD_HEIGHT - 1) {
+                        if (content[position + BOARD_WIDTH].isEven() || content[position - BOARD_WIDTH].isEven()) {
+                            isHorizontal = false;
+                        }
+                    }
+                    highlight(position);
+                }
                 ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
             }
         });
+    }
+
+    private void highlight(int position){
+        if (isHorizontal) {
+            if (position < BOARD_HEIGHT * BOARD_WIDTH - 1) {
+                while ((position + 1) % BOARD_WIDTH != 0 && content[position + 1].isEven()) {
+                    content[position + 1].setHighlight(true);
+                    highlightPositions.add(position + 1);
+                    position = position + 1;
+
+                    if (position >= BOARD_HEIGHT * BOARD_WIDTH - 1) {
+                        break;
+                    }
+                }
+            }
+            position = positionInFocus;
+            if (position > 0) {
+                while (content[position - 1].isEven()) {
+                    content[position - 1].setHighlight(true);
+                    highlightPositions.add(position - 1);
+                    position = position - 1;
+
+                    if (position <= 0) {
+                        break;
+                    }
+                }
+            }
+        }
+        if (!isHorizontal) {
+            if (position < BOARD_HEIGHT * BOARD_WIDTH - BOARD_WIDTH) {
+                while (content[position + BOARD_WIDTH].isEven()) {
+                    content[position + BOARD_WIDTH].setHighlight(true);
+                    highlightPositions.add(position + BOARD_WIDTH);
+                    position = position + BOARD_WIDTH;
+
+                    if (position >= BOARD_HEIGHT * BOARD_WIDTH - BOARD_WIDTH) {
+                        break;
+                    }
+                }
+            }
+            position = positionInFocus;
+            if (position > BOARD_WIDTH) {
+                while (content[position - BOARD_WIDTH].isEven()) {
+                    content[position - BOARD_WIDTH].setHighlight(true);
+                    highlightPositions.add(position - BOARD_WIDTH);
+                    position = position - BOARD_WIDTH;
+
+                    if (position <= BOARD_WIDTH - 1) {
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     private boolean check() {
@@ -272,23 +363,35 @@ public class CrosswordActivity extends AppCompatActivity {
         if (positionInFocus != -1) {
             if (content[positionInFocus].isEven()){
                 content[positionInFocus].setValue(value);
-                if (content[positionInFocus+1].isEven()) {
-                    if (isHorizontal) {
-                        lastPositionInFocus = positionInFocus;
-                        positionInFocus = positionInFocus + 1;
-                        content[positionInFocus].setSelected(true);
-                        content[lastPositionInFocus].setSelected(false);
-
-                    } else {
-                        lastPositionInFocus = positionInFocus;
-                        positionInFocus = positionInFocus + BOARD_WIDTH;
-                        content[positionInFocus].setSelected(true);
-                        content[lastPositionInFocus].setSelected(false);
+                if (isHorizontal) {
+                    if (!(content.length - 1 <= positionInFocus)) {
+                        if ((positionInFocus + 1) % BOARD_WIDTH != 0 && content[positionInFocus + 1].isEven()) {
+                            lastPositionInFocus = positionInFocus;
+                            positionInFocus = positionInFocus + 1;
+                            content[positionInFocus].setSelected(true);
+                            content[positionInFocus].setHighlight(false);
+                            content[lastPositionInFocus].setSelected(false);
+                            content[lastPositionInFocus].setHighlight(true);
+                            highlightPositions.add(lastPositionInFocus);
+                            }
+                        }
+                    }
+                else{
+                    if (!(content.length - BOARD_WIDTH <= positionInFocus)) {
+                        if (content[positionInFocus + BOARD_WIDTH].isEven()) {
+                            lastPositionInFocus = positionInFocus;
+                            positionInFocus = positionInFocus + BOARD_WIDTH;
+                            content[positionInFocus].setSelected(true);
+                            content[positionInFocus].setHighlight(false);
+                            content[lastPositionInFocus].setSelected(false);
+                            content[lastPositionInFocus].setHighlight(true);
+                            highlightPositions.add(lastPositionInFocus);
+                        }
                     }
                 }
-                ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
             }
         }
+        ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
     }
 
     private void toPuzzleString() {
