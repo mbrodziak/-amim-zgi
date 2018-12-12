@@ -13,6 +13,7 @@ import com.example.mateusz.lamimozgi.adapters.CrosswordGridAdapter;
 import com.example.mateusz.lamimozgi.items.CrosswordCell;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CrosswordActivity extends AppCompatActivity {
     private GameApplication app;
@@ -24,6 +25,8 @@ public class CrosswordActivity extends AppCompatActivity {
     private boolean isHorizontal;
     private int lastPositionInFocus;
     private ArrayList<Integer> highlightPositions = new ArrayList<>();
+    private TextView hint;
+    private HashMap crosswordClues;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +37,23 @@ public class CrosswordActivity extends AppCompatActivity {
         String type = app.selectedStage.getType();
         BOARD_WIDTH = app.selectedStage.getWidth();
         BOARD_HEIGHT = app.selectedStage.getHeight();
-
-        content = fromPuzzleString(board, save, clue, type);
+        crosswordClues = clueMaker(clue);
+        content = fromPuzzleString(board, save, type);
         setUpViews();
     }
 
-    private CrosswordCell[] fromPuzzleString(String board, String save, String clue, String type) {
+    private HashMap clueMaker(String clue) {
+        HashMap Clues = new HashMap();
+        String[] splitClue = clue.split("/");
+        for (String e :splitClue){
+            System.out.println(e);
+            String[] split = e.split(";");
+            Clues.put(split[0]+split[1],split[3]);
+        }
+        return Clues;
+    }
+
+    private CrosswordCell[] fromPuzzleString(String board, String save, String type) {
         CrosswordCell[] puz = new CrosswordCell[type.length()];
         for (int i = 0; i < puz.length; i++) {
             String solution = String.valueOf(board.charAt(i));
@@ -65,6 +79,7 @@ public class CrosswordActivity extends AppCompatActivity {
     private void setUpViews() {
         setContentView(R.layout.activity_crossword);
         gameBoard = findViewById(R.id.crosswordGrid);
+        hint = findViewById(R.id.hint);
         findViewById(R.id.buttonA).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -265,7 +280,7 @@ public class CrosswordActivity extends AppCompatActivity {
                             }
                         }
                     }else{
-                        if (position - BOARD_WIDTH > 0 && position + BOARD_WIDTH < BOARD_WIDTH * BOARD_HEIGHT - 1) {
+                        if (position > 0 && position < BOARD_WIDTH * BOARD_HEIGHT - 1) {
                             if (content[position + BOARD_WIDTH].isEven() || content[position - BOARD_WIDTH].isEven()) {
                                 isHorizontal = !isHorizontal;
                             }
@@ -290,6 +305,21 @@ public class CrosswordActivity extends AppCompatActivity {
                     }
                     highlight(position);
                 }
+                int pos = positionInFocus;
+                System.out.println(pos);
+                if (isHorizontal){
+                    while ((pos - 1) % BOARD_WIDTH != BOARD_WIDTH - 1 && pos > 0 && content[pos - 1].isEven()){
+                        pos = pos - 1;
+                    }
+                    System.out.println(pos);
+                    hint.setText((String) crosswordClues.get("H"+pos));
+                }else{
+                    while (pos > BOARD_WIDTH - 1 && content[pos - BOARD_WIDTH].isEven()){
+                        pos = pos - BOARD_WIDTH;
+                    }
+                    System.out.println(pos);
+                    hint.setText((String) crosswordClues.get("V"+pos));
+                }
                 ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
             }
         });
@@ -310,7 +340,7 @@ public class CrosswordActivity extends AppCompatActivity {
             }
             position = positionInFocus;
             if (position > 0) {
-                while (content[position - 1].isEven()) {
+                while ((position - 1) % BOARD_WIDTH != BOARD_WIDTH - 1 && content[position - 1].isEven()) {
                     content[position - 1].setHighlight(true);
                     highlightPositions.add(position - 1);
                     position = position - 1;

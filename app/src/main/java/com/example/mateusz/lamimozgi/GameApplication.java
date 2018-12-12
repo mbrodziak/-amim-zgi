@@ -104,10 +104,9 @@ public class GameApplication extends Application {
                     String extra = tasksCursor.getString(5);
                     String type = tasksCursor.getString(2);
                     int width = tasksCursor.getInt(6);
-                    int height = tasksCursor.getInt(7);
-                    String boolValue = tasksCursor.getString(8);
+                    String boolValue = tasksCursor.getString(7);
                     boolean complete = Boolean.parseBoolean(boolValue);
-                    s = new Stage(name, stage, width, height, type, complete);
+                    s = new Stage(name, stage, width, width, type, complete);
                     s.setID(stage_id);
                     s.setSave(save);
                     s.setExtra(extra);
