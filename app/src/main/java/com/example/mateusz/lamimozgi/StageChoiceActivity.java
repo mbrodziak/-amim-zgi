@@ -19,6 +19,12 @@ public class StageChoiceActivity extends ListActivity{
         loadStages();
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        loadStages();
+    }
+
     private void loadStages() {
         app.loadStages();
         adapter = new StageListAdapter(this, app.getCurrentStages());

@@ -268,20 +268,37 @@ public class CrosswordActivity extends AppCompatActivity {
                     content[lastPositionInFocus].setSelected(false);
                     for (int e : highlightPositions) {
                         content[e].setHighlight(false);
+                        content[e].setSelected(false);
                     }
                     highlightPositions = new ArrayList<>();
                 }
                 if (position == positionInFocus){
                     content[positionInFocus].setSelected(true);
                     if (!isHorizontal){
-                        if (position > 0 && position < BOARD_HEIGHT * BOARD_WIDTH - 1) {
+                        if (position % BOARD_WIDTH > 0 && position % BOARD_WIDTH < BOARD_WIDTH - 1) {
                             if (content[position + 1].isEven() || content[position - 1].isEven()) {
+                                isHorizontal = !isHorizontal;
+                            }
+                        }else if(position % BOARD_WIDTH == 0){
+                            if (content[position + 1].isEven()){
+                                isHorizontal = !isHorizontal;
+                            }
+                        }else if(position % BOARD_WIDTH == BOARD_WIDTH - 1){
+                            if (content[position - 1].isEven()){
                                 isHorizontal = !isHorizontal;
                             }
                         }
                     }else{
-                        if (position > 0 && position < BOARD_WIDTH * BOARD_HEIGHT - 1) {
+                        if (position - BOARD_WIDTH >= 0 && position + BOARD_WIDTH <= BOARD_WIDTH * BOARD_HEIGHT - 1) {
                             if (content[position + BOARD_WIDTH].isEven() || content[position - BOARD_WIDTH].isEven()) {
+                                isHorizontal = !isHorizontal;
+                            }
+                        }else if(position - BOARD_WIDTH < 0){
+                            if (content[position + BOARD_WIDTH].isEven()){
+                                isHorizontal = !isHorizontal;
+                            }
+                        }else if(position + BOARD_WIDTH > BOARD_HEIGHT * BOARD_WIDTH - 1){
+                            if (content[position - BOARD_WIDTH].isEven()){
                                 isHorizontal = !isHorizontal;
                             }
                         }
@@ -293,13 +310,29 @@ public class CrosswordActivity extends AppCompatActivity {
                     content[positionInFocus].setSelected(true);
                     lastPositionInFocus = positionInFocus;
 
-                    if (position > 0 && position < BOARD_HEIGHT * BOARD_WIDTH - 1) {
+                    if (position % BOARD_WIDTH > 0 && position % BOARD_WIDTH < BOARD_WIDTH - 1) {
                         if (content[position + 1].isEven() || content[position - 1].isEven()) {
                             isHorizontal = true;
                         }
+                    }else if(position % BOARD_WIDTH == 0){
+                        if (content[position + 1].isEven()){
+                            isHorizontal = true;
+                        }
+                    }else if(position % BOARD_WIDTH == BOARD_WIDTH - 1){
+                        if (content[position - 1].isEven()){
+                            isHorizontal = true;
+                        }
                     }
-                    if (position - BOARD_WIDTH > 0 && position + BOARD_WIDTH < BOARD_WIDTH * BOARD_HEIGHT - 1) {
+                    if (position - BOARD_WIDTH >= 0 && position + BOARD_WIDTH <= BOARD_WIDTH * BOARD_HEIGHT - 1) {
                         if (content[position + BOARD_WIDTH].isEven() || content[position - BOARD_WIDTH].isEven()) {
+                            isHorizontal = false;
+                        }
+                    }else if(position - BOARD_WIDTH < 0){
+                        if (content[position + BOARD_WIDTH].isEven()){
+                            isHorizontal = false;
+                        }
+                    }else if(position + BOARD_WIDTH > BOARD_HEIGHT * BOARD_WIDTH - 1){
+                        if (content[position - BOARD_WIDTH].isEven()){
                             isHorizontal = false;
                         }
                     }
@@ -326,6 +359,7 @@ public class CrosswordActivity extends AppCompatActivity {
     }
 
     private void highlight(int position){
+        int stablePosition = position;
         if (isHorizontal) {
             if (position < BOARD_HEIGHT * BOARD_WIDTH - 1) {
                 while ((position + 1) % BOARD_WIDTH != 0 && content[position + 1].isEven()) {
@@ -338,7 +372,7 @@ public class CrosswordActivity extends AppCompatActivity {
                     }
                 }
             }
-            position = positionInFocus;
+            position = stablePosition;
             if (position > 0) {
                 while ((position - 1) % BOARD_WIDTH != BOARD_WIDTH - 1 && content[position - 1].isEven()) {
                     content[position - 1].setHighlight(true);
@@ -363,8 +397,8 @@ public class CrosswordActivity extends AppCompatActivity {
                     }
                 }
             }
-            position = positionInFocus;
-            if (position > BOARD_WIDTH) {
+            position = stablePosition;
+            if (position >= BOARD_WIDTH) {
                 while (content[position - BOARD_WIDTH].isEven()) {
                     content[position - BOARD_WIDTH].setHighlight(true);
                     highlightPositions.add(position - BOARD_WIDTH);
