@@ -10,29 +10,35 @@
         android:layout_weight="1" >
 
         <Button
-            android:id="@+id/buttonA"
+            android:id="@+id/buttonQ"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/a" />
+            android:text="@string/q" />
 
         <Button
-            android:id="@+id/buttonZ"
+            android:id="@+id/buttonW"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/z" />
+            android:text="@string/w" />
 
         <Button
             android:id="@+id/buttonE"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -42,7 +48,9 @@
         <Button
             android:id="@+id/buttonR"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -52,7 +60,9 @@
         <Button
             android:id="@+id/buttonT"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -62,7 +72,9 @@
         <Button
             android:id="@+id/buttonY"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -72,7 +84,9 @@
         <Button
             android:id="@+id/buttonU"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -82,7 +96,9 @@
         <Button
             android:id="@+id/buttonI"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -92,7 +108,9 @@
         <Button
             android:id="@+id/buttonO"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -102,7 +120,9 @@
         <Button
             android:id="@+id/buttonP"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -118,19 +138,23 @@
         android:paddingRight="15dp" >
 
         <Button
-            android:id="@+id/buttonQ"
+            android:id="@+id/buttonA"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/q" />
+            android:text="@string/a" />
 
         <Button
             android:id="@+id/buttonS"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -140,7 +164,9 @@
         <Button
             android:id="@+id/buttonD"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -150,7 +176,9 @@
         <Button
             android:id="@+id/buttonF"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -160,7 +188,9 @@
         <Button
             android:id="@+id/buttonG"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -170,7 +200,9 @@
         <Button
             android:id="@+id/buttonH"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -180,7 +212,9 @@
         <Button
             android:id="@+id/buttonJ"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -190,7 +224,9 @@
         <Button
             android:id="@+id/buttonK"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -200,7 +236,9 @@
         <Button
             android:id="@+id/buttonL"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -211,32 +249,28 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp">
 
         <Button
-            android:id="@+id/buttonCHECK"
+            android:id="@+id/buttonZ"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="@string/check"  />
-
-        <Button
-            android:id="@+id/buttonW"
-            style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
-            android:background="@drawable/round_button2"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:text="@string/w" />
+            android:text="@string/z" />
 
         <Button
             android:id="@+id/buttonX"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -246,7 +280,9 @@
         <Button
             android:id="@+id/buttonC"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -256,7 +292,9 @@
         <Button
             android:id="@+id/buttonV"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -266,7 +304,9 @@
         <Button
             android:id="@+id/buttonB"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -276,7 +316,9 @@
         <Button
             android:id="@+id/buttonN"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -286,22 +328,50 @@
         <Button
             android:id="@+id/buttonM"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:background="@drawable/round_button2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:text="@string/m" />
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <Button
+            android:id="@+id/buttonCHECK"
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="@drawable/round_button3"
+            android:textColor="@color/lightGreen"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/check"  />
+
         <Button
             android:id="@+id/buttonDELETE"
             style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/white"
-            android:background="@drawable/round_button2"
+            android:background="@drawable/round_button3"
+            android:textColor="@color/lightGreen"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="0.9"
+            android:layout_weight="1"
             android:text="@string/delete" />
+
     </LinearLayout>
+
 
 </LinearLayout>
