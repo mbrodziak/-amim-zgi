@@ -77,7 +77,7 @@ public class GameChoiceActivity extends AppCompatActivity {
         guessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                app.gameType = "quesswork";
+                app.gameType = "quessWork";
                 layoutLevel();
             }
         });

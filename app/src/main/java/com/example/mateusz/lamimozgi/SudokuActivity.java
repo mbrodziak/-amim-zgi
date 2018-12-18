@@ -1,6 +1,5 @@
 package com.example.mateusz.lamimozgi;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,16 +17,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SudokuActivity extends AppCompatActivity {
+public class SudokuActivity extends AppCompatActivity implements GameActivity {
     private GameApplication app;
     private SudokuCell[] content;
     private GridView gameBoard;
     private int BOARD_SIZE;
-    private TextView viewInFocus;
-    private int positionInFocus;
-    private Drawable res;
+    private int positionInFocus = -1;
+    private int lastPositionInFocus;
     private ArrayList<ArrayList<Integer>> group;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (GameApplication) getApplication();
@@ -36,15 +35,21 @@ public class SudokuActivity extends AppCompatActivity {
         String mark = app.selectedStage.getExtra();
         String type = app.selectedStage.getType();
         BOARD_SIZE = app.selectedStage.getWidth();
-        group = new ArrayList<>();
-        for (int i = 0; i < BOARD_SIZE; i++){
-            group.add(new ArrayList<Integer>());
-        }
-        content = fromPuzzleString(board, save, mark, type);
+        groupMaker();
+        fromPuzzleString(board, save, mark, type);
         setUpViews();
     }
 
-    private SudokuCell[] fromPuzzleString(String string, String save, String mark, String type) {
+    private void groupMaker() {
+        ArrayList<ArrayList<Integer>> groups = new ArrayList<>();
+        for (int i = 0; i < BOARD_SIZE; i++){
+            groups.add(new ArrayList<Integer>());
+        }
+        group = groups;
+    }
+
+    @Override
+    public void fromPuzzleString(String string, String save, String mark, String type) {
         SudokuCell[] puz = new SudokuCell[string.length()];
         for (int i = 0; i < puz.length; i++) {
             int value = string.charAt(i) - '0';
@@ -77,14 +82,15 @@ public class SudokuActivity extends AppCompatActivity {
             sc.setHighlighted(isHighlighted);
             puz[i] = sc;
         }
-        return puz;
+        content = puz;
     }
 
     private void add(int typeValue, int e) {
         group.get(typeValue).add(e);
     }
 
-    private void setUpViews() {
+    @Override
+    public void setUpViews() {
         if (BOARD_SIZE == 6){
             setContentView(R.layout.activity_6x6sudoku);
         }else if(BOARD_SIZE == 9){
@@ -97,6 +103,7 @@ public class SudokuActivity extends AppCompatActivity {
         }
 
         gameBoard = findViewById(R.id.sudokuGrid);
+        TextView text = findViewById(R.id.Text);
         findViewById(R.id.buttonNullValue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,20 +149,13 @@ public class SudokuActivity extends AppCompatActivity {
         findViewById(R.id.buttonCheckBoard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean solved = true;
 
-                for (int i = 0; i < BOARD_SIZE; i++) {
-                    if (traverseHorizontal(i) || traverseVertical(i) || traverseSquareGroups(i)) {
-                        solved = false;
-                        break;
-                    }
-                }
-                if (solved) {
-                    Toast.makeText(getApplicationContext(), "You did it! Congrats!",
+                if (check()) {
+                    Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!",
                             Toast.LENGTH_SHORT).show();
                     app.selectedStage.setComplete(true);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Nope... Not correct.",
+                    Toast.makeText(getApplicationContext(), "Nie... Nie poprawne.",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -170,22 +170,34 @@ public class SudokuActivity extends AppCompatActivity {
                 }
             }
         });
-        TextView text = findViewById(R.id.Text);
         text.setText(app.selectedStage.getName());
         gameBoard.setNumColumns(BOARD_SIZE);
-        gameBoard.setAdapter(new SudokuGridAdapter(this, R.layout.sudoku_grid_cell_layout, content));
+        gameBoard.setAdapter(new SudokuGridAdapter(this, R.layout.grid_cell_layout, content));
         gameBoard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (viewInFocus != null) {
-                    viewInFocus.setBackground(res);
+                if (positionInFocus != -1) {
+                    content[lastPositionInFocus].setSelected(false);
                 }
-                viewInFocus = (TextView) view;
                 positionInFocus = position;
-                res = view.getBackground();
-                view.setBackgroundResource(R.drawable.selected_cell_background);
+                content[positionInFocus].setSelected(true);
+                lastPositionInFocus = positionInFocus;
+                ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public boolean check() {
+        boolean solved = true;
+
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            if (traverseHorizontal(i) || traverseVertical(i) || traverseSquareGroups(i)) {
+                solved = false;
+                break;
+            }
+        }
+        return solved;
     }
 
     private void setUpViews9() {
@@ -264,7 +276,8 @@ public class SudokuActivity extends AppCompatActivity {
         }
     }
 
-    private void toPuzzleString() {
+    @Override
+    public void toPuzzleString() {
         StringBuilder bufSave = new StringBuilder();
         StringBuilder bufMark = new StringBuilder();
         for (SudokuCell cell : content) {
@@ -285,18 +298,21 @@ public class SudokuActivity extends AppCompatActivity {
         app.selectedStage.setSave(bufSave.toString());
     }
 
+    @Override
     protected void onPause() {
         super.onPause();
         toPuzzleString();
         app.saveStage();
     }
 
+    @Override
     protected void onStop() {
         super.onStop();
         toPuzzleString();
         app.saveStage();
     }
 
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         toPuzzleString();

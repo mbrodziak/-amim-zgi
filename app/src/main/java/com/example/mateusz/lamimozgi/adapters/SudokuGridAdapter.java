@@ -33,20 +33,25 @@ public class SudokuGridAdapter extends ArrayAdapter<SudokuCell> {
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
 
-        if (Objects.requireNonNull(this.getItem(position)).isEven()){
-            view.setBackgroundResource(R.drawable.even_cell_background);
+        if(Objects.requireNonNull(this.getItem(position)).isSelected()) {
+            view.setBackgroundResource(R.drawable.selected_cell_background);
             ((TextView) view).setTextAppearance(R.style.textStyle);
+        }else {
+            if (Objects.requireNonNull(this.getItem(position)).isEven()) {
+                view.setBackgroundResource(R.drawable.even_cell_background);
+                ((TextView) view).setTextAppearance(R.style.textStyle);
+            }
+            if (!(Objects.requireNonNull(this.getItem(position)).isEven())) {
+                view.setBackgroundResource(R.drawable.odd_cell_background);
+                ((TextView) view).setTextAppearance(R.style.textStyle);
+            }
         }
-        if (!Objects.requireNonNull(this.getItem(position)).isEven()){
-            view.setBackgroundResource(R.drawable.odd_cell_background);
-            ((TextView) view).setTextAppearance(R.style.textStyle);
-        }
-        if (Objects.requireNonNull(this.getItem(position)).isHighlighted()) {
-            ((TextView) view).setTextColor(Color.parseColor("#CF1020"));
-        } else {
-            ((TextView) view).setTextColor(Color.parseColor("#ffffff"));
-        }if (Objects.requireNonNull(this.getItem(position)).isInitialValue()){
+        if (Objects.requireNonNull(this.getItem(position)).isInitialValue()){
             ((TextView) view).setTextColor(Color.parseColor("#00DA00"));
+        }else if (Objects.requireNonNull(this.getItem(position)).isHighlighted()) {
+            ((TextView) view).setTextColor(Color.parseColor("#CF1020"));
+        }else if (!Objects.requireNonNull(this.getItem(position)).isHighlighted()){
+            ((TextView) view).setTextColor(Color.parseColor("#ffffff"));
         }
 
         return view;

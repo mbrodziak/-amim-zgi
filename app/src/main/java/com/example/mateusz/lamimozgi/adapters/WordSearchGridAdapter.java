@@ -8,13 +8,13 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.mateusz.lamimozgi.R;
-import com.example.mateusz.lamimozgi.items.CrosswordCell;
+import com.example.mateusz.lamimozgi.items.WordSearchCell;
 
 import java.util.Objects;
 
-public class CrosswordGridAdapter extends ArrayAdapter<CrosswordCell> {
+public class WordSearchGridAdapter extends ArrayAdapter<WordSearchCell> {
 
-    public CrosswordGridAdapter(Context context, int textViewResId, CrosswordCell[] cells) {
+    public WordSearchGridAdapter(Context context, int textViewResId, WordSearchCell[] cells) {
         super(context, textViewResId, cells);
     }
 
@@ -39,9 +39,6 @@ public class CrosswordGridAdapter extends ArrayAdapter<CrosswordCell> {
             ((TextView) view).setTextAppearance(R.style.textStyle);
         }else if (Objects.requireNonNull(this.getItem(position)).isEven()){
             view.setBackgroundResource(R.drawable.even_cell_background);
-            ((TextView) view).setTextAppearance(R.style.textStyle);
-        }else{
-            view.setBackgroundResource(R.drawable.zero_cell_background);
             ((TextView) view).setTextAppearance(R.style.textStyle);
         }
         return view;

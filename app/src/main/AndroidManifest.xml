@@ -24,6 +24,7 @@
         <activity android:name=".StageChoiceActivity" />
         <activity android:name=".SudokuActivity" />
         <activity android:name=".CrosswordActivity" />
+        <activity android:name=".WordSearchActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

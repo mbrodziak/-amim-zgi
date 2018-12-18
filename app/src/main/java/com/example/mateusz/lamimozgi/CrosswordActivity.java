@@ -15,7 +15,7 @@ import com.example.mateusz.lamimozgi.items.CrosswordCell;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CrosswordActivity extends AppCompatActivity {
+public class CrosswordActivity extends AppCompatActivity implements GameActivity {
     private GameApplication app;
     private int BOARD_WIDTH;
     private int BOARD_HEIGHT;
@@ -28,6 +28,7 @@ public class CrosswordActivity extends AppCompatActivity {
     private TextView hint;
     private HashMap crosswordClues;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (GameApplication) getApplication();
@@ -37,12 +38,12 @@ public class CrosswordActivity extends AppCompatActivity {
         String type = app.selectedStage.getType();
         BOARD_WIDTH = app.selectedStage.getWidth();
         BOARD_HEIGHT = app.selectedStage.getHeight();
-        crosswordClues = clueMaker(clue);
-        content = fromPuzzleString(board, save, type);
+        clueMaker(clue);
+        fromPuzzleString(board, save, type, "");
         setUpViews();
     }
 
-    private HashMap clueMaker(String clue) {
+    private void clueMaker(String clue) {
         HashMap Clues = new HashMap();
         String[] splitClue = clue.split("/");
         for (String e :splitClue){
@@ -50,10 +51,11 @@ public class CrosswordActivity extends AppCompatActivity {
             String[] split = e.split(";");
             Clues.put(split[0]+split[1],split[3]);
         }
-        return Clues;
+        crosswordClues = Clues;
     }
 
-    private CrosswordCell[] fromPuzzleString(String board, String save, String type) {
+    @Override
+    public void fromPuzzleString(String board, String save, String type, String mark) {
         CrosswordCell[] puz = new CrosswordCell[type.length()];
         for (int i = 0; i < puz.length; i++) {
             String solution = String.valueOf(board.charAt(i));
@@ -70,14 +72,16 @@ public class CrosswordActivity extends AppCompatActivity {
                 value = " ";
             }
 
-            CrosswordCell sc = new CrosswordCell(value, solution, isEven);
-            puz[i] = sc;
+            CrosswordCell cc = new CrosswordCell(value, solution, isEven);
+            puz[i] = cc;
         }
-        return puz;
+        content = puz;
     }
 
-    private void setUpViews() {
+    @Override
+    public void setUpViews() {
         setContentView(R.layout.activity_crossword);
+        TextView text = findViewById(R.id.Text);
         gameBoard = findViewById(R.id.crosswordGrid);
         hint = findViewById(R.id.hint);
         findViewById(R.id.buttonA).setOnClickListener(new View.OnClickListener() {
@@ -240,11 +244,11 @@ public class CrosswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (check()) {
-                    Toast.makeText(getApplicationContext(), "You did it! Congrats!",
+                    Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!",
                             Toast.LENGTH_SHORT).show();
                     app.selectedStage.setComplete(true);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Nope... Not correct.",
+                    Toast.makeText(getApplicationContext(), "Nie... Nie poprawne.",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -256,10 +260,9 @@ public class CrosswordActivity extends AppCompatActivity {
             }
         });
 
-        TextView text = findViewById(R.id.Text);
         text.setText(app.selectedStage.getName());
         gameBoard.setNumColumns(BOARD_WIDTH);
-        gameBoard.setAdapter(new CrosswordGridAdapter(this, R.layout.crossword_grid_cell_layout, content));
+        gameBoard.setAdapter(new CrosswordGridAdapter(this, R.layout.grid_cell_layout, content));
         gameBoard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -267,7 +270,7 @@ public class CrosswordActivity extends AppCompatActivity {
                 if (positionInFocus != -1) {
                     content[lastPositionInFocus].setSelected(false);
                     for (int e : highlightPositions) {
-                        content[e].setHighlight(false);
+                        content[e].setHighlighted(false);
                         content[e].setSelected(false);
                     }
                     highlightPositions = new ArrayList<>();
@@ -363,7 +366,7 @@ public class CrosswordActivity extends AppCompatActivity {
         if (isHorizontal) {
             if (position < BOARD_HEIGHT * BOARD_WIDTH - 1) {
                 while ((position + 1) % BOARD_WIDTH != 0 && content[position + 1].isEven()) {
-                    content[position + 1].setHighlight(true);
+                    content[position + 1].setHighlighted(true);
                     highlightPositions.add(position + 1);
                     position = position + 1;
 
@@ -375,7 +378,7 @@ public class CrosswordActivity extends AppCompatActivity {
             position = stablePosition;
             if (position > 0) {
                 while ((position - 1) % BOARD_WIDTH != BOARD_WIDTH - 1 && content[position - 1].isEven()) {
-                    content[position - 1].setHighlight(true);
+                    content[position - 1].setHighlighted(true);
                     highlightPositions.add(position - 1);
                     position = position - 1;
 
@@ -388,7 +391,7 @@ public class CrosswordActivity extends AppCompatActivity {
         if (!isHorizontal) {
             if (position < BOARD_HEIGHT * BOARD_WIDTH - BOARD_WIDTH) {
                 while (content[position + BOARD_WIDTH].isEven()) {
-                    content[position + BOARD_WIDTH].setHighlight(true);
+                    content[position + BOARD_WIDTH].setHighlighted(true);
                     highlightPositions.add(position + BOARD_WIDTH);
                     position = position + BOARD_WIDTH;
 
@@ -400,7 +403,7 @@ public class CrosswordActivity extends AppCompatActivity {
             position = stablePosition;
             if (position >= BOARD_WIDTH) {
                 while (content[position - BOARD_WIDTH].isEven()) {
-                    content[position - BOARD_WIDTH].setHighlight(true);
+                    content[position - BOARD_WIDTH].setHighlighted(true);
                     highlightPositions.add(position - BOARD_WIDTH);
                     position = position - BOARD_WIDTH;
 
@@ -412,7 +415,8 @@ public class CrosswordActivity extends AppCompatActivity {
         }
     }
 
-    private boolean check() {
+    @Override
+    public boolean check() {
         boolean solved = true;
         for (int i = 0; i < BOARD_WIDTH*BOARD_HEIGHT; i++) {
             if (!content[i].check()){
@@ -433,9 +437,9 @@ public class CrosswordActivity extends AppCompatActivity {
                             lastPositionInFocus = positionInFocus;
                             positionInFocus = positionInFocus + 1;
                             content[positionInFocus].setSelected(true);
-                            content[positionInFocus].setHighlight(false);
+                            content[positionInFocus].setHighlighted(false);
                             content[lastPositionInFocus].setSelected(false);
-                            content[lastPositionInFocus].setHighlight(true);
+                            content[lastPositionInFocus].setHighlighted(true);
                             highlightPositions.add(lastPositionInFocus);
                             }
                         }
@@ -446,9 +450,9 @@ public class CrosswordActivity extends AppCompatActivity {
                             lastPositionInFocus = positionInFocus;
                             positionInFocus = positionInFocus + BOARD_WIDTH;
                             content[positionInFocus].setSelected(true);
-                            content[positionInFocus].setHighlight(false);
+                            content[positionInFocus].setHighlighted(false);
                             content[lastPositionInFocus].setSelected(false);
-                            content[lastPositionInFocus].setHighlight(true);
+                            content[lastPositionInFocus].setHighlighted(true);
                             highlightPositions.add(lastPositionInFocus);
                         }
                     }
@@ -458,7 +462,8 @@ public class CrosswordActivity extends AppCompatActivity {
         ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
     }
 
-    private void toPuzzleString() {
+    @Override
+    public void toPuzzleString() {
         StringBuilder bufSave = new StringBuilder();
         for (CrosswordCell cell : content) {
             if (cell.isEven()) {
@@ -475,18 +480,21 @@ public class CrosswordActivity extends AppCompatActivity {
         app.selectedStage.setSave(bufSave.toString());
     }
 
+    @Override
     protected void onPause() {
         super.onPause();
         toPuzzleString();
         app.saveStage();
     }
 
+    @Override
     protected void onStop() {
         super.onStop();
         toPuzzleString();
         app.saveStage();
     }
 
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         toPuzzleString();

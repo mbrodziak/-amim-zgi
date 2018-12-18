@@ -2,32 +2,29 @@ package com.example.mateusz.lamimozgi.items;
 
 import android.support.annotation.NonNull;
 
-public class CrosswordCell implements Cell{
-    private String solution;
-    private String value;
+public class WordSearchCell implements Cell {
     private boolean isEven;
-    private boolean isSelected;
     private boolean isHighlighted;
+    private boolean isSelected;
+    private int numberOfWords;
+    private String value;
+    private boolean isWrong;
 
-    public CrosswordCell(String value, String solution, boolean isEven) {
+    public WordSearchCell(String value, int nOW, boolean isHighlighted) {
         this.value = value;
-        this.solution = solution;
-        this.isEven = isEven;
-        this.isHighlighted = false;
+        this.numberOfWords = nOW;
+        this.isEven = true;
+        this.isHighlighted = isHighlighted;
         this.isSelected = false;
-    }
-
-    public boolean check(){
-        if (isEven){
-            return value.equals(solution);
-        }else{
-            return true;
-        }
     }
 
     @Override
     public String getValue() {
         return value;
+    }
+
+    public int getNumberOfWords() {
+        return numberOfWords;
     }
 
     @Override
@@ -61,12 +58,19 @@ public class CrosswordCell implements Cell{
     }
 
     @NonNull
-    @Override
     public String toString() {
         if (value.equals(" ")) {
             return "";
         } else {
             return value;
         }
+    }
+
+    public boolean isWrong() {
+        return isWrong;
+    }
+
+    public void setWrong(boolean wrong) {
+        isWrong = wrong;
     }
 }

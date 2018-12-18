@@ -2,11 +2,12 @@ package com.example.mateusz.lamimozgi.items;
 
 import android.support.annotation.NonNull;
 
-public class SudokuCell {
+public class SudokuCell implements Cell{
     private int value;
-    private final boolean isInitialValue;
-    private final boolean isEven;
+    private boolean isInitialValue;
+    private boolean isEven;
     private boolean isHighlighted;
+    private boolean isSelected;
 
     public SudokuCell(int val, boolean isInitial, boolean isEven) {
         this.value = val;
@@ -15,28 +16,43 @@ public class SudokuCell {
         this.isEven = isEven;
     }
 
-    public int getValue() {
+    @Override
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    @Override
+    public void setValue(Object value) {
+        this.value = (int) value;
     }
 
     public boolean isInitialValue() {
         return isInitialValue;
     }
 
+    @Override
     public boolean isEven(){
         return isEven;
     }
 
+    @Override
     public boolean isHighlighted() {
         return isHighlighted;
     }
 
+    @Override
     public void setHighlighted(boolean isHighlighted) {
         this.isHighlighted = isHighlighted;
+    }
+
+    @Override
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    @Override
+    public void setSelected(boolean selected) {
+        this.isSelected = selected;
     }
 
     @NonNull

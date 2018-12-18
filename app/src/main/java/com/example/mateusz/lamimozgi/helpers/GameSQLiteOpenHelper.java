@@ -122,6 +122,42 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 COMPLETE + " text " +
                 ")");
 
+        db.execSQL("create table wordSearch0 ( " +
+                STAGE_ID + " text primary key not null, " +
+                STAGE_NAME + " text, " +
+                STAGE_TYPE + " text, "+
+                STAGE + " text, " +
+                STAGE_SAVE + " text, " +
+                STAGE_EXTRA + " text, " +
+                STAGE_WIDTH + " integer, " +
+                STAGE_HEIGHT + " integer, " +
+                COMPLETE + " text " +
+                ")");
+
+        db.execSQL("create table wordSearch1 ( " +
+                STAGE_ID + " text primary key not null, " +
+                STAGE_NAME + " text, " +
+                STAGE_TYPE + " text, "+
+                STAGE + " text, " +
+                STAGE_SAVE + " text, " +
+                STAGE_EXTRA + " text, " +
+                STAGE_WIDTH + " integer, " +
+                STAGE_HEIGHT + " integer, " +
+                COMPLETE + " text " +
+                ")");
+
+        db.execSQL("create table wordSearch2 ( " +
+                STAGE_ID + " text primary key not null, " +
+                STAGE_NAME + " text, " +
+                STAGE_TYPE + " text, "+
+                STAGE + " text, " +
+                STAGE_SAVE + " text, " +
+                STAGE_EXTRA + " text, " +
+                STAGE_WIDTH + " integer, " +
+                STAGE_HEIGHT + " integer, " +
+                COMPLETE + " text " +
+                ")");
+
 
         db.execSQL("insert into normalSudoku0 (ID, name, stage, save, extra, complete) VALUES ('200','Simple 1', '080020673307105200024073010602010408108006052700842090410208007050760900076400581','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
         db.execSQL("insert into normalSudoku1 (ID, name, stage, save, extra, complete) VALUES ('200','Medium 1', '000100300504030000000200098740980230100020004062045019250007000000090105009002000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
@@ -151,6 +187,10 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 "'E.N.SPIRALADZEM.L.A.I.W.FIGA.DANEAURA.ZIL.D.R.OMAM.OSADDELIKAT.Z.R..O.T.RZEPALEGIA.Y.W.Z.R.R.WBICIEROZMARYN.G..T.I.Z.DOLAHYMN.OKO.A..K.A.S.REKA'," +
                 "'-.-.-----------.-.-.-.-.----.--------.---.-.-.----.-----------.-.-..-.-.----------.-.-.-.-.-.--------------.-..-.-.-.--------.---.-..-.-.-.----'," +
                 "'H;4;10;Figura akrobacji lotniczej/H;11;14;Zespół muz. R. Riedla/H;24;27;Pot. nic/H;29;32;Osobowe, to personalia/H;33;36;Deszczowa - jesienią/H;38;40;Marka ros. ciężarówki/H;46;49;Przywidzenie, złudzenie/H;51;54;Fusy na dnie szklanki/H;55;61;Przyprawa uniwersalna Knorra/H;72;76;„Krzepkie” warzywo/H;77;81;Ochotniczy oddział wojska/H;93;98;Gwoździa w deskę przy użyciu młotka/H;99;106;Wiecznie zielony krzew z wargowych/H;117;120;Los przypadający komuś w udziale/H;121;124;Jest nim „Mazurek Dąbrowskiego”/H;126;128;Pętelka w sieci/H;139;142;Wkładana do kieszeni/V;0;55;Imię twórcy kabaretu Dudek/V;2;79;Specjalista od chorób nerek/V;5;60;Płynny składnik krwi; osocze/V;7;51;Wyparte przez sochę/V;9;53;Bogusław, aktor („Kroll”, „Psy”)/V;14;58;Główne miasto Florydy/V;48;81;Dokumentacja sądowa/V;52;96;Zawód J. Kilińskiego/V;54;98;Drobne okrągłe cukierki/V;61;105;Rowki na walcu lub stożku/V;78;133;Zmysłowy wiersz/V;80;135;Świętuje razem z Adamem i Ewą/V;93;137;Krzewinka o różowofioletowych kwiatach/V;95;139;Samiec z koralami/V;97;141;Jodła, sosna lub modrzew',11,13,'false');");
+        db.execSQL("insert into wordSearch0 (ID, name, type, stage, save, extra, width, height, complete) VALUES ('200','wordSearch 1', " +
+                "'0000001000100010112121211121101011222010000100100000012100000010'," +
+                "'ELAVGOWWCGFXQZÓQKRABŻÓŁWMURJEFPXMETALQOBGUYDKETXCAJCUSOKFVAFPGPK'," +
+                "'0000000000000000000000000000000000000000000000000000000000000000/0000000000','FART/MUR/KRAB/METAL/ŻEL/JAD/ŻÓŁW/WÓŁ/SOK/POTOP',8,8,'false');");
     }
 
     @Override

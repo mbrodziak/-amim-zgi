@@ -29,6 +29,7 @@ public class GameApplication extends Application {
     private ArrayList<Stage> currentStages;
     private SQLiteDatabase database;
 
+    @Override
     public void onCreate() {
         super.onCreate();
         GameSQLiteOpenHelper helper = new GameSQLiteOpenHelper(this);
@@ -45,6 +46,12 @@ public class GameApplication extends Application {
             }
             case "unNormalSudoku": {
                 Intent intent = new Intent(getApplicationContext(), SudokuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+            }
+            case "wordSearch": {
+                Intent intent = new Intent(getApplicationContext(), WordSearchActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
@@ -113,6 +120,25 @@ public class GameApplication extends Application {
                     currentStages.add(s);
                 } while (tasksCursor.moveToNext());
                 break;
+            case "wordSearch":
+                do {
+                    String stage_id = tasksCursor.getString(0);
+                    String name = tasksCursor.getString(1);
+                    String stage = tasksCursor.getString(3);
+                    String save = tasksCursor.getString(4);
+                    String extra = tasksCursor.getString(5);
+                    String type = tasksCursor.getString(2);
+                    int width = tasksCursor.getInt(6);
+                    int height = tasksCursor.getInt(7);
+                    String boolValue = tasksCursor.getString(8);
+                    boolean complete = Boolean.parseBoolean(boolValue);
+                    s = new Stage(name, stage, width, height, type, complete);
+                    s.setID(stage_id);
+                    s.setSave(save);
+                    s.setExtra(extra);
+                    currentStages.add(s);
+                } while (tasksCursor.moveToNext());
+                break;
             case "crossword":
                 do {
                     String stage_id = tasksCursor.getString(0);
@@ -158,6 +184,23 @@ public class GameApplication extends Application {
                 break;
             }
             case "unNormalSudoku": {
+                ContentValues values = new ContentValues();
+                values.put(STAGE_NAME, selectedStage.getName());
+                values.put(STAGE_TYPE, selectedStage.getType());
+                values.put(STAGE, selectedStage.getStage());
+                values.put(STAGE_SAVE, selectedStage.getSave());
+                values.put(STAGE_EXTRA, selectedStage.getExtra());
+                values.put(STAGE_WIDTH, selectedStage.getWidth());
+                values.put(STAGE_HEIGHT, selectedStage.getHeight());
+                values.put(COMPLETE, Boolean.toString(selectedStage.isComplete()));
+
+                String id = selectedStage.getID();
+                String where = String.format("%s = '%s'", STAGE_ID, id);
+                String STAGE_TABLE = gameType + gameLevel;
+                database.update(STAGE_TABLE, values, where, null);
+                break;
+            }
+            case "wordSearch": {
                 ContentValues values = new ContentValues();
                 values.put(STAGE_NAME, selectedStage.getName());
                 values.put(STAGE_TYPE, selectedStage.getType());
