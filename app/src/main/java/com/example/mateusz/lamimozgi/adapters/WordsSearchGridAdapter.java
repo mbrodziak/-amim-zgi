@@ -33,7 +33,7 @@ public class WordsSearchGridAdapter extends ArrayAdapter<WordsSearchCell> {
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
         if (Objects.requireNonNull(this.getItem(position)).isFound()){
-            view.setBackgroundResource(R.drawable.zero_cell_background);
+            view.setBackgroundResource(R.drawable.odd_cell_background);
             ((TextView) view).setTextAppearance(R.style.textStyle);
             ((TextView) view).setTextColor(Color.parseColor("#808080"));
         }else {

@@ -151,12 +151,10 @@ public class SudokuActivity extends AppCompatActivity implements GameActivity {
             public void onClick(View v) {
 
                 if (check()) {
-                    Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!", Toast.LENGTH_SHORT).show();
                     app.selectedStage.setComplete(true);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Nie... Nie poprawne.",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Nie... Nie poprawne.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -262,8 +260,8 @@ public class SudokuActivity extends AppCompatActivity implements GameActivity {
     }
 
     private boolean traverseHorizontal(int line) {
-        int startPoint = line*BOARD_SIZE;
-        int endPoint = startPoint+(BOARD_SIZE);
+        int startPoint = line * BOARD_SIZE;
+        int endPoint = startPoint + (BOARD_SIZE);
         Set<SudokuCell> hElements = new HashSet<>(Arrays.asList(content).subList(startPoint, endPoint));
 
         return hElements.contains(new SudokuCell(0, false, false)) || hElements.contains(new SudokuCell(0, false, true)) || hElements.size() != BOARD_SIZE;

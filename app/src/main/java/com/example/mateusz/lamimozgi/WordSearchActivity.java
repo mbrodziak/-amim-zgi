@@ -7,9 +7,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mateusz.lamimozgi.adapters.WordSearchGridAdapter;
 import com.example.mateusz.lamimozgi.adapters.WordsSearchGridAdapter;
+import com.example.mateusz.lamimozgi.items.SudokuCell;
 import com.example.mateusz.lamimozgi.items.WordSearchCell;
 import com.example.mateusz.lamimozgi.items.WordsSearchCell;
 
@@ -19,7 +21,6 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
 
     private GameApplication app;
     private int BOARD_WIDTH;
-    private int BOARD_HEIGHT;
     private GridView gameBoard;
     private GridView words;
     private WordSearchCell[] content;
@@ -37,7 +38,6 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
         String word = app.selectedStage.getExtra();
         String type = app.selectedStage.getType();
         BOARD_WIDTH = app.selectedStage.getWidth();
-        BOARD_HEIGHT = app.selectedStage.getHeight();
         String[] saveSplit = save.split("/");
         fromPuzzleString(board, saveSplit[0], type, "");
         wordMaker(word, saveSplit[1]);
@@ -92,42 +92,53 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (positionInFocus != -1) {
+                    positionInFocus = position;
                     content[lastPositionInFocus].setSelected(false);
-                    int difference = lastPositionInFocus - positionInFocus;
-                    if (difference > 0) {
-                        if (difference <= BOARD_WIDTH){
-                            if (checkWord(1)){
-                                highlight();
-                            }else {
-
-                            }
-                        }
-                    }else if (difference < 0) {
-
+                    int difference = positionInFocus - lastPositionInFocus;
+                    if (checkWord(1)){
+                        highlight();
+                    }else if(checkWord(BOARD_WIDTH)){
+                        highlight();
+                    }else if (checkWord(BOARD_WIDTH + 1)) {
+                        highlight();
                     }
+                    positionInFocus = -1;
                 }else{
                     positionInFocus = position;
                     content[positionInFocus].setSelected(true);
                     lastPositionInFocus = positionInFocus;
                 }
                 ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
+                ((ArrayAdapter) words.getAdapter()).notifyDataSetChanged();
+                if (check() && (!app.selectedStage.isComplete())){
+                    Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!", Toast.LENGTH_SHORT).show();
+                    app.selectedStage.setComplete(true);
+                }
             }
         });
     }
 
     private boolean checkWord(int increment) {
         StringBuilder bufWord = new StringBuilder();
+        StringBuilder revBufWord = new StringBuilder();
         positionsList = new ArrayList<>();
         int maxPIF = Math.max(positionInFocus, lastPositionInFocus);
         int minPIF = Math.min(positionInFocus, lastPositionInFocus);
         for (int j = minPIF; j <= maxPIF; j = j + increment){
             positionsList.add(j);
             bufWord.append(content[j].getValue());
+            revBufWord.insert(0, content[j].getValue());
         }
         boolean compare = false;
         for (WordsSearchCell WSC : Words){
             if (WSC.compare(bufWord.toString())){
                 compare = true;
+                WSC.setFound(true);
+                break;
+            }
+            if (WSC.compare(revBufWord.toString())) {
+                compare = true;
+                WSC.setFound(true);
                 break;
             }
         }
@@ -136,24 +147,48 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
 
     private void highlight() {
         for (Integer position : positionsList){
+            System.out.println(position + " position");
             content[position].setHighlighted(true);
         }
     }
 
     @Override
     public boolean check() {
-        return false;
+        boolean solved = true;
+        for (WordsSearchCell WSC : Words){
+            System.out.println(WSC + " WSC");
+            if (!WSC.isFound()){
+                solved = false;
+                break;
+            }
+        }
+        return solved;
     }
 
     @Override
     public void toPuzzleString() {
-
+        StringBuilder bufSave = new StringBuilder();
+        for (WordSearchCell cell : content) {
+            if (cell.isHighlighted()) {
+                bufSave.append("1");
+            }else{
+                bufSave.append("0");
+            }
+        }
+        bufSave.append("/");
+        for (WordsSearchCell word : Words) {
+            if (word.isFound()) {
+                bufSave.append("1");
+            }else{
+                bufSave.append("0");
+            }
+        }
+        app.selectedStage.setSave(bufSave.toString());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        check();
         toPuzzleString();
         app.saveStage();
     }
@@ -161,7 +196,6 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
     @Override
     protected void onStop() {
         super.onStop();
-        check();
         toPuzzleString();
         app.saveStage();
     }
@@ -169,7 +203,6 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        check();
         toPuzzleString();
         app.saveStage();
     }

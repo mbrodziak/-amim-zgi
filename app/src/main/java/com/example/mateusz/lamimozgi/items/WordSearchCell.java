@@ -8,7 +8,6 @@ public class WordSearchCell implements Cell {
     private boolean isSelected;
     private int numberOfWords;
     private String value;
-    private boolean isWrong;
 
     public WordSearchCell(String value, int nOW, boolean isHighlighted) {
         this.value = value;
@@ -64,13 +63,5 @@ public class WordSearchCell implements Cell {
         } else {
             return value;
         }
-    }
-
-    public boolean isWrong() {
-        return isWrong;
-    }
-
-    public void setWrong(boolean wrong) {
-        isWrong = wrong;
     }
 }

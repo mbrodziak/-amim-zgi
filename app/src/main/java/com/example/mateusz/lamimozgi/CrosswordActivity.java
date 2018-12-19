@@ -244,12 +244,10 @@ public class CrosswordActivity extends AppCompatActivity implements GameActivity
             @Override
             public void onClick(View v) {
                 if (check()) {
-                    Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!", Toast.LENGTH_SHORT).show();
                     app.selectedStage.setComplete(true);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Nie... Nie poprawne.",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Nie... Nie poprawne.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
