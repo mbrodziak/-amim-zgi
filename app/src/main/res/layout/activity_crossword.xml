@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/round_text_view2"
         android:textAlignment="center"
@@ -31,7 +31,7 @@
         android:layout_above="@id/hint"
         android:layout_below="@id/Text"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="-2dp" />
 
     <TextView
