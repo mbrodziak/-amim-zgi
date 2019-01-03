@@ -158,6 +158,36 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 COMPLETE + " text " +
                 ")");
 
+        db.execSQL("create table hangman0 ( " +
+                STAGE_ID + " text primary key not null, " +
+                STAGE_NAME + " text, " +
+                STAGE_TYPE + " text, "+
+                STAGE + " text, " +
+                STAGE_SAVE + " text, " +
+                STAGE_EXTRA + " text, " +
+                COMPLETE + " text " +
+                ")");
+
+        db.execSQL("create table hangman1 ( " +
+                STAGE_ID + " text primary key not null, " +
+                STAGE_NAME + " text, " +
+                STAGE_TYPE + " text, "+
+                STAGE + " text, " +
+                STAGE_SAVE + " text, " +
+                STAGE_EXTRA + " text, " +
+                COMPLETE + " text " +
+                ")");
+
+        db.execSQL("create table hangman2 ( " +
+                STAGE_ID + " text primary key not null, " +
+                STAGE_NAME + " text, " +
+                STAGE_TYPE + " text, "+
+                STAGE + " text, " +
+                STAGE_SAVE + " text, " +
+                STAGE_EXTRA + " text, " +
+                COMPLETE + " text " +
+                ")");
+
 
         db.execSQL("insert into normalSudoku0 (ID, name, stage, save, extra, complete) VALUES ('200','Simple 1', '080020673307105200024073010602010408108006052700842090410208007050760900076400581','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
         db.execSQL("insert into normalSudoku1 (ID, name, stage, save, extra, complete) VALUES ('200','Medium 1', '000100300504030000000200098740980230100020004062045019250007000000090105009002000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','000000000000000000000000000000000000000000000000000000000000000000000000000000000','false');");
@@ -191,6 +221,7 @@ public class GameSQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelp
                 "'0000001000100010112121211121101011222010000100100000012100000010'," +
                 "'ELAVGOWWCGFXQZÓQKRABŻÓŁWMURJEFPXMETALQOBGUYDKETXCAJCUSOKFVAFPGPK'," +
                 "'0000000000000000000000000000000000000000000000000000000000000000/0000000000','FART/MUR/KRAB/METAL/ŻEL/JAD/ŻÓŁW/WÓŁ/SOK/POTOP',8,8,'false');");
+        db.execSQL("insert into hangman0 (ID, name, type, stage, save, extra, complete) VALUES ('200','first hang','TELEWIZOR','---------','',0,'false');");
     }
 
     @Override

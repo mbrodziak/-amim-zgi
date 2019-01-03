@@ -25,6 +25,7 @@
         <activity android:name=".SudokuActivity" />
         <activity android:name=".CrosswordActivity" />
         <activity android:name=".WordSearchActivity" />
+        <activity android:name=".HangmanActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

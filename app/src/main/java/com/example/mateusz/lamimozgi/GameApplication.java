@@ -62,6 +62,12 @@ public class GameApplication extends Application {
                 startActivity(intent);
                 break;
             }
+            case "hangman": {
+                Intent intent = new Intent(getApplicationContext(), HangmanActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+            }
         }
     }
 
@@ -158,6 +164,23 @@ public class GameApplication extends Application {
                     currentStages.add(s);
                 } while (tasksCursor.moveToNext());
                 break;
+            case "hangman":
+                do {
+                    String stage_id = tasksCursor.getString(0);
+                    String name = tasksCursor.getString(1);
+                    String stage = tasksCursor.getString(3);
+                    String save = tasksCursor.getString(4);
+                    String extra = tasksCursor.getString(5);
+                    String type = tasksCursor.getString(2);
+                    String boolValue = tasksCursor.getString(6);
+                    boolean complete = Boolean.parseBoolean(boolValue);
+                    s = new Stage(name, stage, 0, 0, type, complete);
+                    s.setID(stage_id);
+                    s.setSave(save);
+                    s.setExtra(extra);
+                    currentStages.add(s);
+                } while (tasksCursor.moveToNext());
+                break;
         }
         tasksCursor.close();
     }
@@ -226,6 +249,21 @@ public class GameApplication extends Application {
                 values.put(STAGE_EXTRA, selectedStage.getExtra());
                 values.put(STAGE_WIDTH, selectedStage.getWidth());
                 values.put(STAGE_HEIGHT, selectedStage.getHeight());
+                values.put(COMPLETE, Boolean.toString(selectedStage.isComplete()));
+
+                String id = selectedStage.getID();
+                String where = String.format("%s = '%s'", STAGE_ID, id);
+                String STAGE_TABLE = gameType + gameLevel;
+                database.update(STAGE_TABLE, values, where, null);
+                break;
+            }
+            case "hangman": {
+                ContentValues values = new ContentValues();
+                values.put(STAGE_NAME, selectedStage.getName());
+                values.put(STAGE_TYPE, selectedStage.getType());
+                values.put(STAGE, selectedStage.getStage());
+                values.put(STAGE_SAVE, selectedStage.getSave());
+                values.put(STAGE_EXTRA, selectedStage.getExtra());
                 values.put(COMPLETE, Boolean.toString(selectedStage.isComplete()));
 
                 String id = selectedStage.getID();

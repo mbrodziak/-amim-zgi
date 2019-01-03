@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.example.mateusz.lamimozgi.adapters.WordSearchGridAdapter;
 import com.example.mateusz.lamimozgi.adapters.WordsSearchGridAdapter;
-import com.example.mateusz.lamimozgi.items.SudokuCell;
 import com.example.mateusz.lamimozgi.items.WordSearchCell;
 import com.example.mateusz.lamimozgi.items.WordsSearchCell;
 
@@ -94,7 +93,6 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
                 if (positionInFocus != -1) {
                     positionInFocus = position;
                     content[lastPositionInFocus].setSelected(false);
-                    int difference = positionInFocus - lastPositionInFocus;
                     if (checkWord(1)){
                         highlight();
                     }else if(checkWord(BOARD_WIDTH)){

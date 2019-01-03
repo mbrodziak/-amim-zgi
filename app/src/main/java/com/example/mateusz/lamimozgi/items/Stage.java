@@ -72,4 +72,8 @@ public class Stage {
     public int getHeight() {
         return  Height;
     }
+
+    public void setStage(String stage) {
+        this.Stage = stage;
+    }
 }
