@@ -209,7 +209,7 @@ public class GuessWorkActivity extends AppCompatActivity implements GameActivity
 
     private void deleteLetter() {
         int len = answer.length();
-        answer = answer.substring(0,len-2);
+        answer = answer.substring(0,len-1);
         answerView.setText(answer);
     }
 
