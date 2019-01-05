@@ -26,6 +26,7 @@
         <activity android:name=".CrosswordActivity" />
         <activity android:name=".WordSearchActivity" />
         <activity android:name=".HangmanActivity" />
+        <activity android:name=".GuessWorkActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
