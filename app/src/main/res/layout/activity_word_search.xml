@@ -27,9 +27,9 @@
         android:id="@+id/WSB"
         layout="@layout/word_search_board"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_below="@id/Text"/>
+        android:layout_height="415dp"
+        android:layout_below="@id/Text"
+        android:layout_marginTop="5dp" />
 
     <include
         layout="@layout/word_search_words"

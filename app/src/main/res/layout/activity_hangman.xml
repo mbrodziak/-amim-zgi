@@ -31,7 +31,7 @@
         android:layout_below="@id/Text"
         android:layout_above="@id/hint"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="1dp"
         android:contentDescription="@string/hangmanX"
         app:srcCompat="@drawable/hangman0" />

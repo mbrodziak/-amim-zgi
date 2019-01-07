@@ -27,7 +27,7 @@
     <include
         layout="@layout/crossword"
         android:layout_width="match_parent"
-        android:layout_height="344dp"
+        android:layout_height="337dp"
         android:layout_above="@id/hint"
         android:layout_below="@id/Text"
         android:layout_alignParentStart="true"
@@ -37,7 +37,7 @@
     <TextView
         android:id="@+id/hint"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="45dp"
         android:layout_above="@id/keyboard2"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"

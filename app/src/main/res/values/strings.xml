@@ -7,7 +7,7 @@
     <string name="hangman">Wisielec</string>
     <string name="play">Graj</string>
     <string name="options">Opcje</string>
-    <string name="statistics">Stystyki</string>
+    <string name="statistics">Statystyki</string>
     <string name="about">O aplikacji</string>
     <string name="world_lamimimozg">Świat Łamimózgów czeka na Ciebie. Co chcesz zrobić?</string>
     <string name="choice_lamimozg">Którego Łamimózga wybierzesz?</string>
@@ -84,4 +84,6 @@
     <string name="m">M</string>
     <string name="delete">Usuń</string>
     <string name="hangmanX">Hangman!</string>
+    <string name="information">Łamimózgi to aplikacją mobilną, zaprojektowaną na system Android. Jest przeznaczona dla wszystkich osób, którzy lubią gry logiczne. W aplikacji można porozwązywać sudoku regularne(9x9) oraz nieregularne, krzyżówki, poznajdywać i powykreślać słowa, pograć w wisielca oraz udać się w świat zgadywanek.</string>
+
 </resources>
