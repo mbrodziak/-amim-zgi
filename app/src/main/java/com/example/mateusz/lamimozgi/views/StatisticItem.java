@@ -26,7 +26,19 @@ public class StatisticItem extends LinearLayout {
     }
 
     public void setStatistic(Statistic statistic){
-        difficulty.setText(statistic.getDifficulty());
-        difficulty.setText(String.format(Locale.US,"%d/%d", statistic.getAmountWin(), statistic.getAmountGames()));
+        if (statistic.getDifficulty()==0){
+            difficulty.setText(R.string.easy);
+        }else if (statistic.getDifficulty()==1){
+            difficulty.setText(R.string.medium);
+        }else if (statistic.getDifficulty()==2){
+            difficulty.setText(R.string.hard);
+        }
+        if (statistic.getAmountGames()==1){
+            progress.setText(String.format(Locale.US,"%d " + getContext().getString(R.string.win1) + "% d " + getContext().getString(R.string.game1), statistic.getAmountWin(), statistic.getAmountGames()));
+        }else if (statistic.getAmountGames()==2 || statistic.getAmountGames()==3 || statistic.getAmountGames()==4 ){
+            progress.setText(String.format(Locale.US,"%d " + getContext().getString(R.string.win2) + "% d " + getContext().getString(R.string.game2), statistic.getAmountWin(), statistic.getAmountGames()));
+        }else{
+            progress.setText(String.format(Locale.US,"%d " + getContext().getString(R.string.win5) + "% d " + getContext().getString(R.string.game5), statistic.getAmountWin(), statistic.getAmountGames()));
+        }
     }
 }

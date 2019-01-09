@@ -36,11 +36,12 @@ public class GameApplication extends Application {
     private int CurrentMusic = -1;
     private Context context;
     private int GameMusic;
+    private GameSQLiteOpenHelper helper;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        GameSQLiteOpenHelper helper = new GameSQLiteOpenHelper(this);
+        helper = new GameSQLiteOpenHelper(this);
         database = helper.getWritableDatabase();
         context = getApplicationContext();
         playMusic();
@@ -132,9 +133,33 @@ public class GameApplication extends Application {
     }
 
     public void resetAllGames() {
+        helper.dropTable(database);
+        helper.createTable(database);
     }
 
     public void resetGame(String game) {
+        switch (game) {
+            case "sudoku": {
+                helper.dropTableSudoku(database);
+                helper.createTableSudoku(database);
+            }
+            case "wordSearch": {
+                helper.dropTableWordSearch(database);
+                helper.createTableWordSearch(database);
+            }
+            case "crossword": {
+                helper.dropTableCrossword(database);
+                helper.createTableCrossword(database);
+            }
+            case "guessWork": {
+                helper.dropTableGuessWork(database);
+                helper.createTableGuessWork(database);
+            }
+            case "hangman": {
+                helper.dropTableHangman(database);
+                helper.createTableHangman(database);
+            }
+        }
     }
 
     public void stageChoice() {
@@ -290,7 +315,6 @@ public class GameApplication extends Application {
                 values.put(STAGE_SAVE, selectedStage.getSave());
                 values.put(STAGE_EXTRA, selectedStage.getExtra());
                 values.put(STAGE_WIDTH, selectedStage.getWidth());
-                values.put(STAGE_HEIGHT, selectedStage.getHeight());
                 values.put(COMPLETE, Boolean.toString(selectedStage.isComplete()));
 
                 String id = selectedStage.getID();

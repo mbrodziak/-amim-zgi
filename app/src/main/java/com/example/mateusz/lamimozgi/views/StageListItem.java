@@ -9,7 +9,6 @@ import com.example.mateusz.lamimozgi.R;
 import com.example.mateusz.lamimozgi.items.Stage;
 
 public class StageListItem extends LinearLayout {
-    private Stage stage;
     private TextView complete;
     private TextView title;
 
@@ -25,7 +24,6 @@ public class StageListItem extends LinearLayout {
     }
 
     public void setStage(Stage stage) {
-        this.stage = stage;
         if (stage.isComplete()){
             complete.setText(R.string.finished);
         }else{

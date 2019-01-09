@@ -111,6 +111,15 @@
         app:srcCompat="@drawable/arrow_right"
         android:contentDescription="@string/arrow" />
 
+    <ImageView
+        android:id="@+id/back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/arrow_left"
+        android:contentDescription="@string/arrow" />
+
 
 
 </RelativeLayout>

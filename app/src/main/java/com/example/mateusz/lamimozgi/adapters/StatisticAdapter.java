@@ -1,9 +1,9 @@
 package com.example.mateusz.lamimozgi.adapters;
 
-import android.content.Context;
-import android.view.View;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
 import com.example.mateusz.lamimozgi.R;
 import com.example.mateusz.lamimozgi.items.Statistic;
@@ -11,42 +11,42 @@ import com.example.mateusz.lamimozgi.views.StatisticItem;
 
 import java.util.ArrayList;
 
-public class StatisticAdapter extends BaseAdapter {
+public class StatisticAdapter extends RecyclerView.Adapter<StatisticAdapter.StatisticViewHolder> {
 
 
-    private final Context context;
     private final ArrayList<Statistic> statistics;
 
-    public StatisticAdapter(Context context, ArrayList<Statistic> statistics) {
+    public StatisticAdapter(ArrayList<Statistic> statistics) {
         super();
         this.statistics = statistics;
-        this.context = context;
+    }
+
+
+    @NonNull
+    @Override
+    public StatisticViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        StatisticItem si = (StatisticItem) LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.statistic_item, viewGroup, false);
+        return new StatisticViewHolder(si);
     }
 
     @Override
-    public int getCount() {
+    public void onBindViewHolder(@NonNull StatisticViewHolder statisticViewHolder, int i) {
+        statisticViewHolder.statisticsItem.setStatistic(statistics.get(i));
+
+    }
+
+    @Override
+    public int getItemCount() {
         return statistics.size();
     }
 
-    @Override
-    public Statistic getItem(int position) {
-        return (null == statistics) ? null : statistics.get(position);
-    }
+    class StatisticViewHolder extends RecyclerView.ViewHolder{
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+        private final StatisticItem statisticsItem;
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        StatisticItem si;
-        if (null == convertView) {
-            si = (StatisticItem) View.inflate(context, R.layout.statistic_item, null);
-        } else {
-            si = (StatisticItem) convertView;
+        StatisticViewHolder(@NonNull StatisticItem itemView) {
+            super(itemView);
+            statisticsItem = itemView;
         }
-        si.setStatistic(statistics.get(position));
-        return si;
     }
 }

@@ -88,5 +88,11 @@
     <string name="autors">Polecają autorzy aplikacji: Mateusz Olszewski oraz Mateusz Brodziak.</string>
     <string name="back">Wróć</string>
     <string name="arrow">arrow</string>
+    <string name="win1">wykonano na</string>
+    <string name="win2">wykonano na</string>
+    <string name="win5">wykonano na</string>
+    <string name="game1">grę</string>
+    <string name="game2">gry</string>
+    <string name="game5">gier</string>
 
 </resources>
