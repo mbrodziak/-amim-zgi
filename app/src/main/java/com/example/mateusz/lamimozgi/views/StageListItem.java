@@ -24,10 +24,6 @@ public class StageListItem extends LinearLayout {
         title = findViewById(R.id.tli_title);
     }
 
-    public Stage getStage() {
-        return stage;
-    }
-
     public void setStage(Stage stage) {
         this.stage = stage;
         if (stage.isComplete()){

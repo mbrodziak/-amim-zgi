@@ -33,8 +33,9 @@ public class GameApplication extends Application {
     private SQLiteDatabase database;
     private MediaPlayer soundPlayer;
     private MediaPlayer musicPlayer;
-    private int CurrentMusic = 1;
+    private int CurrentMusic = -1;
     private Context context;
+    private int GameMusic;
 
     @Override
     public void onCreate() {
@@ -42,18 +43,54 @@ public class GameApplication extends Application {
         GameSQLiteOpenHelper helper = new GameSQLiteOpenHelper(this);
         database = helper.getWritableDatabase();
         context = getApplicationContext();
-        playMenuMusic();
+        playMusic();
     }
 
-    private void playMenuMusic() {
-        musicPlayer = MediaPlayer.create(context, R.raw.seeing_the_future);
-        musicPlayer.setVolume(volumeMusic, volumeMusic);
-        musicPlayer.setLooping(true);
+    private void playMusic() {
+        if (CurrentMusic == 0){
+            musicPlayer = MediaPlayer.create(context, R.raw.black_gloves);
+            CurrentMusic += 1;
+        }else if (CurrentMusic == 1){
+            musicPlayer = MediaPlayer.create(context, R.raw.driven_to_success);
+            CurrentMusic += 1;
+        }else if (CurrentMusic == 2){
+            musicPlayer = MediaPlayer.create(context, R.raw.epic_song);
+            CurrentMusic += 1;
+        }else if (CurrentMusic == 3){
+            musicPlayer = MediaPlayer.create(context, R.raw.martina_and_the_air_plan);
+            CurrentMusic += 1;
+        }else if (CurrentMusic == 4){
+            musicPlayer = MediaPlayer.create(context, R.raw.mt_fox_shop);
+            CurrentMusic += 1;
+        }else if (CurrentMusic == 5){
+            musicPlayer = MediaPlayer.create(context, R.raw.rolling);
+            CurrentMusic += 1;
+        }else if (CurrentMusic == 6){
+            musicPlayer = MediaPlayer.create(context, R.raw.running_with_wise_fools);
+            CurrentMusic += 1;
+        }else if (CurrentMusic == 7){
+            musicPlayer = MediaPlayer.create(context, R.raw.upbeat);
+            CurrentMusic += 1;
+        }else if (CurrentMusic == 8){
+            musicPlayer = MediaPlayer.create(context, R.raw.wonderland_instrumental);
+            CurrentMusic = 0;
+        }else if (CurrentMusic == -1){
+            musicPlayer = MediaPlayer.create(context, R.raw.seeing_the_future);
+        }
+        musicPlayer.setVolume(volumeMusic,volumeMusic);
+        musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                playMusic();
+            }
+        });
         musicPlayer.start();
     }
 
     public void gameStart() {
-        playGameMusic();
+        musicPlayer.release();
+        CurrentMusic = GameMusic;
+        playMusic();
         switch (gameType) {
             case "normalSudoku": {
                 Intent intent = new Intent(getApplicationContext(), SudokuActivity.class);
@@ -92,59 +129,6 @@ public class GameApplication extends Application {
                 break;
             }
         }
-    }
-
-    private void playGameMusic() {
-        musicPlayer.release();
-        musicPlayer = MediaPlayer.create(context, R.raw.click);
-        musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-
-                if (CurrentMusic == 0){
-                    mp = MediaPlayer.create(context, R.raw.black_gloves);
-                    musicPlayer.setNextMediaPlayer(mp);
-                    CurrentMusic += 1;
-                }else if (CurrentMusic == 1){
-                    mp = MediaPlayer.create(context, R.raw.driven_to_success);
-                    musicPlayer.setNextMediaPlayer(mp);
-                    CurrentMusic += 1;
-                }else if (CurrentMusic == 2){
-                    mp = MediaPlayer.create(context, R.raw.epic_song);
-                    musicPlayer.setNextMediaPlayer(mp);
-                    CurrentMusic += 1;
-                }else if (CurrentMusic == 3){
-                    mp = MediaPlayer.create(context, R.raw.martina_and_the_air_plan);
-                    musicPlayer.setNextMediaPlayer(mp);
-                    CurrentMusic += 1;
-                }else if (CurrentMusic == 4){
-                    mp = MediaPlayer.create(context, R.raw.mt_fox_shop);
-                    musicPlayer.setNextMediaPlayer(mp);
-                    CurrentMusic += 1;
-                }else if (CurrentMusic == 5){
-                    mp = MediaPlayer.create(context, R.raw.rolling);
-                    musicPlayer.setNextMediaPlayer(mp);
-                    CurrentMusic += 1;
-                }else if (CurrentMusic == 6){
-                    mp = MediaPlayer.create(context, R.raw.running_with_wise_fools);
-                    musicPlayer.setNextMediaPlayer(mp);
-                    CurrentMusic += 1;
-                }else if (CurrentMusic == 7){
-                    mp = MediaPlayer.create(context, R.raw.upbeat);
-                    musicPlayer.setNextMediaPlayer(mp);
-                    CurrentMusic += 1;
-                }else if (CurrentMusic == 8){
-                    mp = MediaPlayer.create(context, R.raw.wonderland_instrumental);
-                    musicPlayer.setNextMediaPlayer(mp);
-                    CurrentMusic = 0;
-                }
-                musicPlayer.setVolume(volumeMusic,volumeMusic);
-                musicPlayer.start();
-            }
-
-        });
-        musicPlayer.setVolume(volumeMusic,volumeMusic);
-        musicPlayer.start();
     }
 
     public void resetAllGames() {
@@ -379,8 +363,10 @@ public class GameApplication extends Application {
                 break;
             }
         }
-        musicPlayer.reset();
-        playMenuMusic();
+        musicPlayer.release();
+        GameMusic = CurrentMusic;
+        CurrentMusic = -1;
+        playMusic();
     }
 
     public void clickSound() {

@@ -34,6 +34,7 @@ public class StageChoiceActivity extends ListActivity{
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+        app.clickSound();
         app.selectedStage = adapter.getItem(position);
         app.gameStart();
     }
