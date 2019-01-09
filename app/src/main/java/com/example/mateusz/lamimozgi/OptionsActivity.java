@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SeekBar;
 
 public class OptionsActivity extends AppCompatActivity {
@@ -16,6 +15,7 @@ public class OptionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        app = (GameApplication) getApplication();
         setContentView(R.layout.activity_options);
         setUpViewsOptions();
     }
@@ -24,95 +24,86 @@ public class OptionsActivity extends AppCompatActivity {
         dialog.dismiss();
     }
 
-    private void layoutOptions(){
+    private void setUpViewsOptions(){
         setContentView(R.layout.activity_options);
-        setUpViewsOptions();
-    }
 
-    private void layoutReset(){
-        setContentView(R.layout.activity_reset);
-        setUpViewsReset();
-    }
-
-    private void resetDialog() {
-        dialog = new resetDialog(this);
-        dialog.show();
-    }
-
-    private void setUpViewsOptions() {
-        Button sound  = findViewById(R.id.sound);
-        Button music = findViewById(R.id.music);
-        Button reset = findViewById(R.id.reset);
-
-        sound.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.sound).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.clickSound();
                 volumeSoundDialog();
             }
         });
 
-        music.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.music).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.clickSound();
                 volumeMusicDialog();
             }
         });
 
-        reset.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.statistics).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.clickSound();
                 resetDialog();
             }
         });
     }
 
-    private void setUpViewsReset() {
-        Button sudokuReset = findViewById(R.id.sudokuReset);
-        Button wsReset = findViewById(R.id.wordSearchReset);
-        Button crossReset = findViewById(R.id.crosswordReset);
-        Button guessReset = findViewById(R.id.guessworkReset);
-        Button hangReset = findViewById(R.id.hangmanReset);
-        app = (GameApplication) getApplication();
+    private void setUpViewsReset(){
+        setContentView(R.layout.activity_reset);
 
-        sudokuReset.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.sudokuReset).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.clickSound();
                 app.resetGame("sudoku");
-                layoutOptions();
+                setUpViewsOptions();
             }
         });
 
-        wsReset.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.wordSearchReset).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.clickSound();
                 app.resetGame("wordSearch");
-                layoutOptions();
+                setUpViewsOptions();
             }
         });
 
-        crossReset.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.crosswordReset).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.clickSound();
                 app.resetGame("crossword");
-                layoutOptions();
+                setUpViewsOptions();
             }
         });
 
-        guessReset.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.guessworkReset).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.clickSound();
                 app.resetGame("guesswork");
-                layoutOptions();
+                setUpViewsOptions();
             }
         });
 
-        hangReset.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.hangmanReset).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.clickSound();
                 app.resetGame("hangman");
-                layoutOptions();
+                setUpViewsOptions();
             }
         });
+    }
+
+    private void resetDialog() {
+        dialog = new resetDialog(this);
+        dialog.show();
     }
 
     private void volumeMusicDialog() {
@@ -139,21 +130,20 @@ public class OptionsActivity extends AppCompatActivity {
         }
 
         private void setUpViews(){
-            Button all = findViewById(R.id.all);
-            Button chosen = findViewById(R.id.chosen);
-
-            all.setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.all).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    app.clickSound();
                     app.resetAllGames();
                     dialogDismiss();
                 }
             });
 
-            chosen.setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.chosen).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    layoutReset();
+                    app.clickSound();
+                    setUpViewsReset();
                     dialogDismiss();
                 }
             });
@@ -175,10 +165,12 @@ public class OptionsActivity extends AppCompatActivity {
 
         private void setUpViews(){
             SeekBar musicVolume = findViewById(R.id.volume_music);
+            musicVolume.setProgress((int) (app.volumeMusic*100));
             musicVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    app.volumeMusic = progress;
+                    app.volumeMusic = (float)progress/100;
+                    app.setMusicVolume();
                 }
 
                 @Override
@@ -210,10 +202,11 @@ public class OptionsActivity extends AppCompatActivity {
 
         private void setUpViews(){
             SeekBar soundVolume = findViewById(R.id.volume_sound);
+            soundVolume.setProgress((int) (app.volumeSound*100));
             soundVolume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    app.volumeMusic = progress;
+                    app.volumeSound = (float)progress/100;
                 }
 
                 @Override

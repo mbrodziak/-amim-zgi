@@ -55,7 +55,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/reset"
+        android:id="@+id/statistics"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentTop="true"

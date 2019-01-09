@@ -191,10 +191,13 @@ public class GuessWorkActivity extends AppCompatActivity implements GameActivity
         findViewById(R.id.buttonCHECK).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.selectionSound();
                 if (check()) {
+                    app.winnerSound();
                     Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!", Toast.LENGTH_SHORT).show();
                     app.selectedStage.setComplete(true);
                 } else {
+                    app.notGoodSound();
                     Toast.makeText(getApplicationContext(), "Nie... Nie poprawne.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -208,12 +211,14 @@ public class GuessWorkActivity extends AppCompatActivity implements GameActivity
     }
 
     private void deleteLetter() {
+        app.writingSound();
         int len = answer.length();
         answer = answer.substring(0,len-1);
         answerView.setText(answer);
     }
 
     private void writeLetter(String Letter) {
+        app.writingSound();
         answer += Letter;
         answerView.setText(answer);
     }

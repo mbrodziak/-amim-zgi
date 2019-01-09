@@ -8,30 +8,34 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    private GameApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
+        app = (GameApplication) getApplication();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         setUpViews();
     }
 
     private void setUpViews() {
-        Button playButton = findViewById(R.id.play);
-        Button optionsButton = findViewById(R.id.options);
-        Button statisticsButton = findViewById(R.id.reset);
+        setContentView(R.layout.activity_main);
+        Button statisticsButton = findViewById(R.id.statistics);
         Button aboutButton = findViewById(R.id.about);
 
-        playButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                app.clickSound();
                 startActivity(new Intent(getApplicationContext(), GameChoiceActivity.class));
+
             }
         });
 
-        optionsButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.options).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                app.clickSound();
                 startActivity(new Intent(getApplicationContext(), OptionsActivity.class));
             }
         });

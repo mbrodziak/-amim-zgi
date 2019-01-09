@@ -247,8 +247,10 @@ public class HangmanActivity extends AppCompatActivity implements GameActivity {
     }
 
     private void checkLetter(String Letter){
+        app.writingSound();
         if ((!app.selectedStage.isComplete())) {
             if (typeString.contains(Letter)) {
+                app.notGoodSound();
                 Toast.makeText(getApplicationContext(), "Było", Toast.LENGTH_SHORT).show();
             } else if (phraseArray.contains(Letter)) {
                 ArrayList<String> phrase = new ArrayList<>(phraseArray);
@@ -268,10 +270,12 @@ public class HangmanActivity extends AppCompatActivity implements GameActivity {
             setSaveString();
             setHangImage();
             if (HangStage == 10) {
+                app.loserSound();
                 Toast.makeText(getApplicationContext(), "Ech", Toast.LENGTH_SHORT).show();
                 reset();
                 this.finish();
             } else if (check()) {
+                app.winnerSound();
                 Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!", Toast.LENGTH_SHORT).show();
                 app.selectedStage.setComplete(true);
             }

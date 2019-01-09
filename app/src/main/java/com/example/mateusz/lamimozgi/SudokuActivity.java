@@ -149,11 +149,13 @@ public class SudokuActivity extends AppCompatActivity implements GameActivity {
         findViewById(R.id.buttonCheckBoard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                app.selectionSound();
                 if (check()) {
+                    app.winnerSound();
                     Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!", Toast.LENGTH_SHORT).show();
                     app.selectedStage.setComplete(true);
                 } else {
+                    app.notGoodSound();
                     Toast.makeText(getApplicationContext(), "Nie... Nie poprawne.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -161,6 +163,7 @@ public class SudokuActivity extends AppCompatActivity implements GameActivity {
         findViewById(R.id.buttonMarkValue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.selectionSound();
                 if (positionInFocus != -1) {
                     boolean isMarked = content[positionInFocus].isHighlighted();
                     content[positionInFocus].setHighlighted(!isMarked);
@@ -174,6 +177,7 @@ public class SudokuActivity extends AppCompatActivity implements GameActivity {
         gameBoard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                app.selectionSound();
                 if (positionInFocus != -1) {
                     content[lastPositionInFocus].setSelected(false);
                 }
@@ -268,6 +272,7 @@ public class SudokuActivity extends AppCompatActivity implements GameActivity {
     }
 
     private void setValueInSelectedView(int value) {
+        app.writingSound();
         if (positionInFocus != -1) {
             content[positionInFocus].setValue(value);
             ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();

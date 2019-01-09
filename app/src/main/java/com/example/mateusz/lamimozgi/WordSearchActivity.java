@@ -90,6 +90,7 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
         gameBoard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                app.selectionSound();
                 if (positionInFocus != -1) {
                     positionInFocus = position;
                     content[lastPositionInFocus].setSelected(false);
@@ -98,6 +99,8 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
                     }else if(checkWord(BOARD_WIDTH)){
                         highlight();
                     }else if (checkWord(BOARD_WIDTH + 1)) {
+                        highlight();
+                    }else if (checkWord(BOARD_WIDTH - 1)) {
                         highlight();
                     }
                     positionInFocus = -1;
@@ -109,6 +112,7 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
                 ((ArrayAdapter) gameBoard.getAdapter()).notifyDataSetChanged();
                 ((ArrayAdapter) words.getAdapter()).notifyDataSetChanged();
                 if (check() && (!app.selectedStage.isComplete())){
+                    app.winnerSound();
                     Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!", Toast.LENGTH_SHORT).show();
                     app.selectedStage.setComplete(true);
                 }
@@ -145,7 +149,6 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
 
     private void highlight() {
         for (Integer position : positionsList){
-            System.out.println(position + " position");
             content[position].setHighlighted(true);
         }
     }
@@ -154,7 +157,6 @@ public class WordSearchActivity extends AppCompatActivity implements GameActivit
     public boolean check() {
         boolean solved = true;
         for (WordsSearchCell WSC : Words){
-            System.out.println(WSC + " WSC");
             if (!WSC.isFound()){
                 solved = false;
                 break;

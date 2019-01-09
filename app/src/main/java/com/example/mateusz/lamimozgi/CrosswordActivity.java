@@ -243,10 +243,13 @@ public class CrosswordActivity extends AppCompatActivity implements GameActivity
         findViewById(R.id.buttonCHECK).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                app.selectionSound();
                 if (check()) {
+                    app.winnerSound();
                     Toast.makeText(getApplicationContext(), "Zrobiłeś to! Gratulacje!", Toast.LENGTH_SHORT).show();
                     app.selectedStage.setComplete(true);
                 } else {
+                    app.notGoodSound();
                     Toast.makeText(getApplicationContext(), "Nie... Nie poprawne.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -265,6 +268,7 @@ public class CrosswordActivity extends AppCompatActivity implements GameActivity
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                app.selectionSound();
                 if (positionInFocus != -1) {
                     content[lastPositionInFocus].setSelected(false);
                     for (int e : highlightPositions) {
@@ -426,6 +430,7 @@ public class CrosswordActivity extends AppCompatActivity implements GameActivity
     }
 
     private void setValueInSelectedView(String value) {
+        app.writingSound();
         if (positionInFocus != -1) {
             if (content[positionInFocus].isEven()){
                 content[positionInFocus].setValue(value);

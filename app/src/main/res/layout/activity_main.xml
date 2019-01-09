@@ -57,7 +57,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/reset"
+        android:id="@+id/statistics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/options"
@@ -76,7 +76,7 @@
         android:id="@+id/about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reset"
+        android:layout_below="@+id/statistics"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="60dp"

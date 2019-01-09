@@ -2,9 +2,11 @@ package com.example.mateusz.lamimozgi;
 
 import android.app.Application;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 
 import com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper;
 import com.example.mateusz.lamimozgi.items.Stage;
@@ -24,19 +26,34 @@ import static com.example.mateusz.lamimozgi.helpers.GameSQLiteOpenHelper.STAGE_W
 public class GameApplication extends Application {
     public String gameType;
     public int gameLevel;
-    public int volumeMusic;
+    public float volumeMusic = (float) 0.5;
     public Stage selectedStage;
+    public float volumeSound = (float) 0.5;
     private ArrayList<Stage> currentStages;
     private SQLiteDatabase database;
+    private MediaPlayer soundPlayer;
+    private MediaPlayer musicPlayer;
+    private int CurrentMusic = 1;
+    private Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
         GameSQLiteOpenHelper helper = new GameSQLiteOpenHelper(this);
         database = helper.getWritableDatabase();
+        context = getApplicationContext();
+        playMenuMusic();
+    }
+
+    private void playMenuMusic() {
+        musicPlayer = MediaPlayer.create(context, R.raw.seeing_the_future);
+        musicPlayer.setVolume(volumeMusic, volumeMusic);
+        musicPlayer.setLooping(true);
+        musicPlayer.start();
     }
 
     public void gameStart() {
+        playGameMusic();
         switch (gameType) {
             case "normalSudoku": {
                 Intent intent = new Intent(getApplicationContext(), SudokuActivity.class);
@@ -75,6 +92,59 @@ public class GameApplication extends Application {
                 break;
             }
         }
+    }
+
+    private void playGameMusic() {
+        musicPlayer.release();
+        musicPlayer = MediaPlayer.create(context, R.raw.click);
+        musicPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+
+                if (CurrentMusic == 0){
+                    mp = MediaPlayer.create(context, R.raw.black_gloves);
+                    musicPlayer.setNextMediaPlayer(mp);
+                    CurrentMusic += 1;
+                }else if (CurrentMusic == 1){
+                    mp = MediaPlayer.create(context, R.raw.driven_to_success);
+                    musicPlayer.setNextMediaPlayer(mp);
+                    CurrentMusic += 1;
+                }else if (CurrentMusic == 2){
+                    mp = MediaPlayer.create(context, R.raw.epic_song);
+                    musicPlayer.setNextMediaPlayer(mp);
+                    CurrentMusic += 1;
+                }else if (CurrentMusic == 3){
+                    mp = MediaPlayer.create(context, R.raw.martina_and_the_air_plan);
+                    musicPlayer.setNextMediaPlayer(mp);
+                    CurrentMusic += 1;
+                }else if (CurrentMusic == 4){
+                    mp = MediaPlayer.create(context, R.raw.mt_fox_shop);
+                    musicPlayer.setNextMediaPlayer(mp);
+                    CurrentMusic += 1;
+                }else if (CurrentMusic == 5){
+                    mp = MediaPlayer.create(context, R.raw.rolling);
+                    musicPlayer.setNextMediaPlayer(mp);
+                    CurrentMusic += 1;
+                }else if (CurrentMusic == 6){
+                    mp = MediaPlayer.create(context, R.raw.running_with_wise_fools);
+                    musicPlayer.setNextMediaPlayer(mp);
+                    CurrentMusic += 1;
+                }else if (CurrentMusic == 7){
+                    mp = MediaPlayer.create(context, R.raw.upbeat);
+                    musicPlayer.setNextMediaPlayer(mp);
+                    CurrentMusic += 1;
+                }else if (CurrentMusic == 8){
+                    mp = MediaPlayer.create(context, R.raw.wonderland_instrumental);
+                    musicPlayer.setNextMediaPlayer(mp);
+                    CurrentMusic = 0;
+                }
+                musicPlayer.setVolume(volumeMusic,volumeMusic);
+                musicPlayer.start();
+            }
+
+        });
+        musicPlayer.setVolume(volumeMusic,volumeMusic);
+        musicPlayer.start();
     }
 
     public void resetAllGames() {
@@ -309,5 +379,47 @@ public class GameApplication extends Application {
                 break;
             }
         }
+        musicPlayer.reset();
+        playMenuMusic();
+    }
+
+    public void clickSound() {
+        soundPlayer = MediaPlayer.create(context,R.raw.click);
+        soundPlayer.setVolume(volumeSound,volumeSound);
+        soundPlayer.start();
+    }
+
+    public void loserSound(){
+        soundPlayer = MediaPlayer.create(context,R.raw.loser);
+        soundPlayer.setVolume(volumeSound,volumeSound);
+        soundPlayer.start();
+    }
+
+    public void notGoodSound(){
+        soundPlayer = MediaPlayer.create(context,R.raw.not_good);
+        soundPlayer.setVolume(volumeSound,volumeSound);
+        soundPlayer.start();
+    }
+
+    public void selectionSound() {
+        soundPlayer = MediaPlayer.create(context,R.raw.selection);
+        soundPlayer.setVolume(volumeSound,volumeSound);
+        soundPlayer.start();
+    }
+
+    public void winnerSound(){
+        soundPlayer = MediaPlayer.create(context,R.raw.winner);
+        soundPlayer.setVolume(volumeSound,volumeSound);
+        soundPlayer.start();
+    }
+
+    public void writingSound(){
+        soundPlayer = MediaPlayer.create(context,R.raw.writing);
+        soundPlayer.setVolume(volumeSound,volumeSound);
+        soundPlayer.start();
+    }
+
+    public void setMusicVolume() {
+        musicPlayer.setVolume(volumeMusic,volumeMusic);
     }
 }
