@@ -15,9 +15,9 @@
     <string name="irregular">Nieregularne</string>
     <string name="normal">Zwykłe</string>
     <string name="choice_level">Wybierz poziom Łamimózga</string>
-    <string name="hard">trudny</string>
-    <string name="medium">sredni</string>
-    <string name="easy">latwy</string>
+    <string name="hard">Trudny</string>
+    <string name="medium">Średni</string>
+    <string name="easy">Łatwy</string>
     <string name="option_text">O to opcje, które czekają na ustawienie. Co zrobisz?</string>
     <string name="music">Muzyka</string>
     <string name="sound">Dźwięk</string>
